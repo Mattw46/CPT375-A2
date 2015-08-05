@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if (isset($_SESSION["authenticated"])) {
-		if ($_SESSION["authenticated"] == False) {
+		if ($_SESSION["authenticated"] == 0) {
 			header("location: login.php");
 		}
 		else {

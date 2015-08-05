@@ -3,14 +3,16 @@
 //require_once(); // databse connector goes here
 /* Defining operation functions 
  * Used to perform functions of the web app*/
-// returns true if username and password in database
+require_once 'validate.php';
+
+// returns user id if found else return 0
 function login($username, $password) {
-	if ($username != "" && $password != "") {
-		// validate text then query the database
-		return True;
+	if (validate_login($username, $password) == True) {
+		// query database
+		return 1;
 	}
 	else {
-		return False;
+		return 0;
 	}
 }
 

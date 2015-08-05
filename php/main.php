@@ -17,7 +17,7 @@
 	<body>
 		<h3>Main Page</h3>
 		<br />
-		<form action="controller.php" method="post" >
+		<form action="../controller/controller.php" method="post" >
 			<input type="hidden" name="action" value="logout">
 			<input type="submit" value="Logout">
 		</form>

@@ -35,8 +35,30 @@
 				header("location: ../index.php");
 			}
 		}
+		else if ($sender == "/register.php") {
+			// get $_POST values
+			
+			// temporary values for testing
+			$details = array(
+				"username" => "user",
+				"first" => "first",
+				"last" => "last",
+				"address1" => "1 some street",
+				"address2" => "",
+				"city" => "Somewhere",
+				"state" => "NSW",
+				"postcode" => "2000",
+				"email" => "user@domain.com",
+				"signup_tmstmp" => "14:30",
+				"user_typ_cd" => "10"
+			);
+			
+			$result = register($details);
+			// if $result true redirect to a success page
+			// else redirect back to register with error
+		}
 		else {
-			echo "another request!<br />";
+			// redirect user back to form and indicate error
 		}
 		
 	}

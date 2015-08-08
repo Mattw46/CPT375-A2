@@ -57,8 +57,24 @@ function bid() {
 	insert();
 }
 
-function register() {
-	insert();
+/*
+	Takes registration details and validates
+	If valid attempts to write to database and returns true
+	If not valid or insert fails returns false
+*/
+function register($details) {
+	$valid = validate_registration($details);
+	
+	if ($valid) {
+		// form query
+		$sql = "INSERT INTO USER";
+		$success = insert($sql);
+		return success;
+	}
+	else {
+		return false;
+	}
+	
 }
 
 function add_auction() {
@@ -84,19 +100,19 @@ function remove_user() {
 /* Defining basic functions to interact with database 
  * To be used with Database connector*/
 function query($query_string) {
-	
+	// returns query result
 }
 
 function update($query_string) {
-	
+	return true;
 }
 
 function delete($query_string) {
-	
+	return true;
 }
 
 function insert($query_string) {
-	
+	return true;
 }
 
 ?>

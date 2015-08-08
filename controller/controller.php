@@ -16,8 +16,11 @@
 			//echo "will now authenticate <br />";
 			$username = $_POST["username"];
 			$password = $_POST["password"];
-			if (login($username, $password)) {
-				$_SESSION["authenticated"] = True;
+			$id = login($username, $password);
+			
+			if ($id > 0) {
+				$_SESSION["authenticated"] = $id;
+				//echo "authenticated<br />";
 				header("location: ../php/main.php");
 			}
 			else {

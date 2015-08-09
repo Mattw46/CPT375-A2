@@ -1,6 +1,6 @@
 <?php 
 /* Model controlls all interactions with the database */
-//require_once(); // databse connector goes here
+require_once 'db_connect.php'; // databse connector goes here
 /* Defining operation functions 
  * Used to perform functions of the web app*/
 require_once 'validate.php';
@@ -67,8 +67,29 @@ function register($details) {
 	
 	if ($valid) {
 		// form query
-		$sql = "INSERT INTO USER";
-		$success = insert($sql);
+		$userSql =  "INSERT INTO user ";
+		$userSql .= "(username, first_name, last_name, address1, address2, city, state";
+		$userSql .= ", postcode, email, signup_tmstmp, user_typ_cd) ";
+		$userSql .= "VALUES ('" . $details['username'] . "','" . $details['first'] . "',";
+		$userSql .= "'" . $details['last'] . "','" . $details['address1'] . "',";
+		$userSql .= "'" . $details['address2'] . "','" . $details['city'] . "',";
+		$userSql .= "'" . $details['state'] . "','" . $details['postcode'] . "',";
+		$userSql .= "'" . $details['email'] . "','" . $details['signup_tmstmp'] . "',";
+		$userSql .= "'" . $details['user_typ_cd'] . "')";
+		
+		$success = insert($userSql);
+		
+		$idSql =  "SELECT user_id FROM user WHERE username = " . $details['username'];
+		$idSql .= " AND signup_tmstmp = " . $details['signup_tmstmp'];
+		
+		$userId = query($idSql);
+		
+		$pwordSql = "INSERT INTO pword ";
+		$pwordSql .= "(user_id, pword) ";
+		$pwordSql .= "VALUES ('" . $userID . "','" . $details['pword'] . "')";
+		
+		$success = insert($pwordSql);
+		
 		return success;
 	}
 	else {

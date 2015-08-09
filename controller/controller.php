@@ -38,6 +38,8 @@
 		else if ($sender == "/register.php") {
 			// get $_POST values
 			
+			//set a timestamp for signup_tmstmp field and pword salting
+			$timestamp = date('Y-m-d G:i:s');
 			// temporary values for testing
 			$details = array(
 				"username" => "user",
@@ -49,8 +51,9 @@
 				"state" => "NSW",
 				"postcode" => "2000",
 				"email" => "user@domain.com",
-				"signup_tmstmp" => "14:30",
-				"user_typ_cd" => "10"
+				"signup_tmstmp" => $timestamp,
+				"user_typ_cd" => "10",
+				"pword" => md5("Password" . $timestamp)
 			);
 			
 			$result = register($details);

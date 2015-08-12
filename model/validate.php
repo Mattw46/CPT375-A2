@@ -70,13 +70,13 @@ function valid_address($details) {
 	$regex_state = "/^[A-Za-z\.]{2,}$/";
 	
 	$address1 = preg_match($regex_address, $details["address1"]);
-	if ($details["address2"] == "" || preg_match($regex_address, $details["address2"]) {
+	if ($details["address2"] == "" || preg_match($regex_address, $details["address2"])) {
 		$address2 = true;
 	}
 	else {
 		$address2 = false;
 	}
-	//$address2 = preg_match($regex_address, $details["address2"]);
+	
 	$postcode = preg_match($regex_postcode, $details["postcode"]);
 	$state = preg_match($regex_state, $details["state"]);
 	

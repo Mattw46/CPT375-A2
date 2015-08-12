@@ -121,7 +121,19 @@ function remove_user() {
 /* Defining basic functions to interact with database 
  * To be used with Database connector*/
 function query($query_string) {
-	// returns query result
+	try {
+		$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
+		$stmt = $conn->prepare($query_string);
+		echo $stmt->execute();
+		$results = $stmt->fetchAll();
+		$stmt = null;
+	}
+	catch (PDOException $e) {
+		echo "Error: ".$e->getMessage();
+		return null;
+	}
+	
+	return $results;
 }
 
 function update($query_string) {

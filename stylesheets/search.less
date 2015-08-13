@@ -1,0 +1,36 @@
+@import (once) "shared/theme.less";
+
+#searchresultsrefine {
+  background-color: @search-results-refine-background-color;
+  font-weight: 700;
+  font-size: 1.05em;
+  #sortBy {
+    width: 300px;
+  }
+  #auctionsPerPage {
+    width: 90px;
+  }
+  .ui-spinner-input {
+    width: 50px;
+  }
+}
+
+#searchresultscontent {
+  .listing {
+    padding: 25px;
+    .inner {
+      padding: 0;
+      background-color: @search-results-listing-background-color;
+      padding-bottom: 10px;
+      img {
+        width: 100%;
+      }
+      p {
+        margin: 0;
+      }
+      .listing-title {
+        font-weight: 700;
+      }
+    }
+  }
+}

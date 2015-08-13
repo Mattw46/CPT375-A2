@@ -1,0 +1,36 @@
+@import (once,less) "theme.less";
+
+body {
+
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+  padding: 0 0.5rem;
+}
+
+#masthead {
+  border-top: solid 20px @above-all-background-color;
+  background-color: @masthead-background-color;
+  #logo {
+    padding-top: 3px;
+  }
+  #place-job {
+    padding-top: 13px;
+    color: @place-job-text-color;
+    button {
+
+      background-color: @place-job-button-background-color;
+      border: none;
+      font-size: 1.5em;
+      font-weight: 700;
+      height: 50px;
+
+    }
+  }
+  .log-in-sign-up p {
+    color: #000;
+  }
+
+}

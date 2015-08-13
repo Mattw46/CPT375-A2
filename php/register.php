@@ -1,11 +1,2 @@
 <?php
-	session_start();
-?>
-
-<html>
-	<header>
-		<title></title>
-	</header>
-	<body>
-	</body>
-</html>
+include_once("components/content/register.php");

@@ -1,0 +1,42 @@
+//external
+@import (once) "external/normalize.css";
+@import (once) "external/jquery-ui.css";
+@import (once) "external/jquery-ui.theme.min.css";
+@import (once) "external/flexboxgrid.css";
+//shared
+@import (once) "shared/theme.less";
+@import (once) "shared/masthead.less";
+@import (once) "shared/searchpane.less";
+@import (once) "shared/footer.less";
+@import (once) "shared/tables.less";
+//page specific
+@import (once) "admin.less";
+@import (once) "search.less";
+@import (once) "auctionrules.less";
+@import (once) "useradmin.less";
+//media
+@import (once) "media.less";
+
+// shared
+body {
+  background-color: @body-background-color;
+  margin: 0;
+  padding: 0;
+  .container-fluid {
+    padding: 0 0.5rem;
+    .content {
+      box-sizing: border-box;
+      border: solid 5px @main-pane-background-color;
+      //h2 {
+      //  margin-left:-15px;
+      //  margin-right:-15px;
+      //}
+      .leftMenu {
+        background-color: @main-pane-content-background-color;
+      }
+    }
+  }
+}
+
+
+

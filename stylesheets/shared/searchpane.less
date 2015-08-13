@@ -1,0 +1,29 @@
+@import (once) "theme.less";
+
+#search {
+  color: @search-font-color;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: @search-pane-background-color;
+  font-size: 1.3em;
+  input, select {
+    height: 37px;
+  }
+  #search-button {
+    border: 2px solid @search-button-border-color;
+    font-weight: 700;
+    height: 39px;
+    background-color: @search-button-color;
+  }
+  input, button, select {
+    width: 100%;
+    box-shadow: 1px 1px 3px @search-form-item-box-shadow-color;
+  }
+  input, select {
+    border: none;
+    padding-left: 10px;
+  }
+  p {
+    margin-bottom: 2px;
+  }
+}

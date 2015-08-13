@@ -1,0 +1,29 @@
+@import (once) "theme.less";
+
+.striped {
+  width: 100%;
+  box-shadow: 1px 1px 1px @table-box-shadow-color;
+  margin-bottom: 22px;
+  thead tr {
+    background-color: @table-stripe-color-1;
+  }
+  tbody {
+    tr {
+      background-color: @table-stripe-color-2;
+      &:nth-child(even) {
+        background-color: @table-stripe-color-3;
+      }
+    }
+  }
+  th, td {
+    padding: 3px;
+    font-size: 1.13em;
+    height: 26px;
+    border: solid 1px @table-stripe-border-color;
+  }
+}
+
+.tableTitle {
+  margin-top: 22px;
+  margin-bottom: 1px;
+}

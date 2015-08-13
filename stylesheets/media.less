@@ -1,0 +1,36 @@
+@import (once) "shared/theme.less";
+
+@sm: 768px;
+@md: 992px;
+@lg: 1200px;
+
+@media screen {
+  @media (min-width: @sm) {
+    .container-fluid {
+      width: 90%;
+      .leftMenu {
+        border-right: solid 5px @main-pane-background-color;
+      }
+    }
+
+    #masthead {
+      padding-top: 5px;
+      .log-in-sign-up p {
+        font-size: 1.83em;
+      }
+    }
+  }
+
+  @media (min-width: @md) {
+    .container-fluid {
+      width: 80%;
+
+    }
+  }
+
+  @media (min-width: @lg) {
+    .container-fluid {
+      width: 65%;
+    }
+  }
+}

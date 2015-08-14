@@ -1,6 +1,6 @@
 <div class="row content">
     <div class="col-xs-12 col-sm-3 leftMenu center-xs">
-        <a href="#">User Admin Panel</a>
+        <a href="./userdetails.php?username='<?php ?>'">User Admin Panel</a>
     </div>
 
     <div class="col-xs-12 col-sm-9" id="addJob">

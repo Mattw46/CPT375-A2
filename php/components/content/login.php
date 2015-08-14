@@ -23,7 +23,7 @@
             <h1>OR</h1>
         </div>
         <div class="col-xs-12 center-xs">
-            <h2><a href="#">Register here</a></h2>
+            <h2><a href="./?page=register">Register here</a></h2>
         </div>
     </div>
 </form>

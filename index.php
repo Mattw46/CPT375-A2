@@ -7,25 +7,14 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="javascript/jquery-ui.min.js"></script>
     <script src="javascript/javascript.js"></script>
-
 </head>
 <body>
 <div class="container-fluid">
 
     <?php
     session_start();
-    if (isset($_SESSION['lastPage'])) {
-        $_SESSION['lastPage'] = $_SESSION['page'];
-    } else {
-        $_SESSION['lastPage'] = "";
-    }
-    if (isset($_GET['page'])) {
-        $_SESSION['page'] = $_GET['page'];
-    } else {
-        $_SESSION['page'] = "";
-    }
-
-    getPage($_SESSION['page'])
+    $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_SPECIAL_CHARS);
+    getPage($page);
     ?>
 
     <?php
@@ -55,9 +44,8 @@
         }
         include_once("./php/components/shared/footer.php");
     }
-
     ?>
-</div>
 
+</div>
 </body>
 </html>

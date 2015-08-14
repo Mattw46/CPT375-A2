@@ -1,25 +1,26 @@
-<?php 
+<?php
 	/* Version 0.1 controller
-	 * Dispatches requestes to correct page after checking
+	 * Dispatches requests to correct page after checking
 	 * if user is authenticated. */
 	session_start();
-	
+
 	require_once '../model/model.php';
-	
-	echo "Controller<br />";
-	
-	if (isset($_POST)) {
+
+echo "Controller<br />";
+
+if (isset($_POST)) {
 		$sender = strrchr($_SERVER['HTTP_REFERER'], '/');
 		//echo $sender."<br />";
-		
-		if ($sender == "/login.php") {
+
+    if ($sender == "/login.php") {
 			//echo "will now authenticate <br />";
 			$username = $_POST["username"];
 			$password = $_POST["password"];
 			$id = login($username, $password);
-			
-			if ($id > 0) {
+
+        if ($id > 0) {
 				$_SESSION["authenticated"] = $id;
+            $_SESSION["username"] = $username;
 				//echo "authenticated<br />";
 				header("location: ../php/main.php");
 			}
@@ -37,8 +38,8 @@
 		}
 		else if ($sender == "/register.php") {
 			// get $_POST values
-			
-			//set a timestamp for signup_tmstmp field and pword salting
+
+            //set a timestamp for signup_tmstmp field and pword salting
 			$timestamp = date('Y-m-d G:i:s');
 			// temporary values for testing
 			$details = array(
@@ -55,16 +56,16 @@
 				"user_typ_cd" => "10",
 				"pword" => md5("Password" . $timestamp)
 			);
-			
-			$result = register($details);
+
+            $result = register($details);
 			// if $result true redirect to a success page
 			// else redirect back to register with error
 		}
 		else {
 			// redirect user back to form and indicate error
 		}
-		
-	}
+
+}
 ?>
 
 

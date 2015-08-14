@@ -1,5 +1,5 @@
-<?php 
-/* Model controlls all interactions with the database */
+<?php
+/* Model controls all interactions with the database */
 require_once 'db_connect.php'; // databse connector goes here
 /* Defining operation functions 
  * Used to perform functions of the web app*/
@@ -11,9 +11,9 @@ define("INVALID_USER", 100);
 function login($username, $password) {
 	if (validate_login($username, $password) == True) {
 		// query database
-		$sql = "SELECT * FROM USER 
+        $sql = "SELECT * FROM USER
 		WHERE username = $username;"; // add join to pword once populated
-		
+
 		// return $user_id if sql query successful
 		return 1;
 	}
@@ -29,11 +29,11 @@ function is_admin($user_id) {
 		return false;
 	}
 	// query db for user code
-	$sql = "select user_id, username, user_typ.user_typ_cd, user_typ 
+    $sql = "select user_id, username, user_typ.user_typ_cd, user_typ
 			from user join user_typ on user.user_typ_cd=user_typ.user_typ_cd 
 			where user_id = 1;";
-			
-	// Query db and return True if user_typ is Admin
+
+    // Query db and return True if user_typ is Admin
 }
 
 // Returns True if user is a professional
@@ -42,11 +42,11 @@ function is_professional() {
 		return false;
 	}
 	// query db for user code
-	$sql = "select user_id, username, user_typ.user_typ_cd, user_typ 
+    $sql = "select user_id, username, user_typ.user_typ_cd, user_typ
 			from user join user_typ on user.user_typ_cd=user_typ.user_typ_cd 
 			where user_id = 1;";
-			
-	// Query db and return True if user_typ is Admin
+
+    // Query db and return True if user_typ is Admin
 }
 
 function get_bids() {
@@ -64,8 +64,8 @@ function bid() {
 */
 function register($details) {
 	$valid = validate_registration($details);
-	
-	if ($valid) {
+
+    if ($valid) {
 		// form query
 		$userSql =  "INSERT INTO user ";
 		$userSql .= "(username, first_name, last_name, address1, address2, city, state";
@@ -76,26 +76,26 @@ function register($details) {
 		$userSql .= "'" . $details['state'] . "','" . $details['postcode'] . "',";
 		$userSql .= "'" . $details['email'] . "','" . $details['signup_tmstmp'] . "',";
 		$userSql .= "'" . $details['user_typ_cd'] . "')";
-		
-		$success = insert($userSql);
-		
-		$idSql =  "SELECT user_id FROM user WHERE username = " . $details['username'];
+
+        $success = insert($userSql);
+
+        $idSql =  "SELECT user_id FROM user WHERE username = " . $details['username'];
 		$idSql .= " AND signup_tmstmp = " . $details['signup_tmstmp'];
-		
-		$userId = query($idSql);
-		
-		$pwordSql = "INSERT INTO pword ";
+
+        $userId = query($idSql);
+
+        $pwordSql = "INSERT INTO pword ";
 		$pwordSql .= "(user_id, pword) ";
 		$pwordSql .= "VALUES ('" . $userID . "','" . $details['pword'] . "')";
-		
-		$success = insert($pwordSql);
-		
-		return success;
+
+        $success = insert($pwordSql);
+
+        return success;
 	}
 	else {
 		return false;
 	}
-	
+
 }
 
 function add_auction() {
@@ -132,8 +132,8 @@ function query($query_string) {
 		echo "Error: ".$e->getMessage();
 		return null;
 	}
-	
-	return $results;
+
+    return $results;
 }
 
 function update($query_string) {

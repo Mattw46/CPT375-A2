@@ -1,7 +1,7 @@
 <form>
     <div class="row" id="search">
         <div class="col-xs-9">
-            <input id="search-field" type="text" value="Search for a job to bid on">
+            <input id="search-field" type="text" placeholder="Search for a job to bid on">
         </div>
         <div class="col-xs-3">
             <button id="search-button">Search</button>

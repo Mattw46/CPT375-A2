@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WDA A2 Front</title>
+    <title><?php echo($pageTitle); ?></title>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="javascript/jquery-ui.min.js"></script>

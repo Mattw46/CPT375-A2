@@ -1,5 +1,7 @@
 <?php
 session_start();
+$keywords = "TODO";
+$pageTitle = "CPT375 A2 : Search" . $keywords;
 include_once("php/components/shared/header.php");
 include_once("php/components/shared/searchform.php");
 include_once("php/components/content/searchrefine.php");

@@ -10,16 +10,30 @@ define("INVALID_USER", 100);
 // returns user id if found else return 0
 function login($username, $password) {
 	if (validate_login($username, $password) == True) {
-		// query database
-        $sql = "SELECT * FROM USER
-		WHERE username = $username;"; // add join to pword once populated
-
-		// return $user_id if sql query successful
-		return 1;
+		
+		$sql = "SELECT username, pword, user.user_id, signup_tmstmp 
+			FROM user JOIN pword on user.user_id=pword.user_id 
+			WHERE username='".$username."';";
+		
+		$results = query($sql);
+		
+		if (!empty($results)) {
+			if ($results[0]['username'] == $username) {
+			
+				// encode password
+				$password = md5($password . $results[0]['signup_tmstmp']);
+			
+				if ($results[0]['pword'] ==  $password) {
+					return $results[0]['user_id']; 
+				}
+			}
+		}
+		
 	}
-	else {
-		return INVALID_USER;
-	}
+	
+	// Default return if all of above checks fail
+	return INVALID_USER;
+	
 }
 
 // Returns True if user is a admin user

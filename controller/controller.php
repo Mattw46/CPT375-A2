@@ -19,10 +19,14 @@ if (isset($_POST)) {
 			$id = login($username, $password);
 
         if ($id > 0) {
-				$_SESSION["authenticated"] = $id;
+			$_SESSION["authenticated"] = $id;
             $_SESSION["username"] = $username;
-				//echo "authenticated<br />";
-				header("location: ../php/main.php");
+
+				if(isset($_SESSION['loginHttpReferer'])) {
+					header("location: ".$_SESSION['loginHttpReferer']);
+				} else {
+					header("location: ./");
+				}
 			}
 			else {
 				//echo "Not Authorised<br/>";

@@ -22,7 +22,7 @@ function login($username, $password) {
 			
 				// encode password
 				$password = md5($password . $results[0]['signup_tmstmp']);
-			
+
 				if ($results[0]['pword'] ==  $password) {
 					return $results[0]['user_id']; 
 				}
@@ -130,6 +130,22 @@ function remove_auction() {
 
 function remove_user() {
 	delete();
+}
+
+function update_password($userID, $newPassword) {
+	$getTimestampSql = "SELECT signup_tmstmp
+						FROM user
+						WHERE user_id='".$userID."';";
+
+	$timestamp = query($getTimestampSql)[0]['signup_tmstmp'];
+	$newPassword = md5($newPassword . $timestamp);
+
+	$updatePasswordSql = "UPDATE pword
+	 					  SET pword='".$newPassword."'
+						  WHERE user_id='".$userID."';";
+
+	query($updatePasswordSql);
+
 }
 
 /* Defining basic functions to interact with database 

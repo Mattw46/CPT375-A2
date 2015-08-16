@@ -23,7 +23,7 @@ if (isset($_POST)) {
             $_SESSION["username"] = $username;
 
 				if(isset($_SESSION['loginHttpReferer'])) {
-					header("location: .".$_SESSION['loginHttpReferer']);
+					header("location: ..".$_SESSION['loginHttpReferer']);
 				} else {
 					header("location: ./");
 				}

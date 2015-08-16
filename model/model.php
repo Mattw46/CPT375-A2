@@ -175,7 +175,16 @@ function delete($query_string) {
 }
 
 function insert($query_string) {
-	return true;
+	$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
+	$stmt = $conn->prepare($query_string);
+	$stmt->execute();
+	if ($stmt->errorCode() == 0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
 }
 
 ?>

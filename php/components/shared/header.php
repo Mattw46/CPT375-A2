@@ -1,3 +1,15 @@
+<?php
+
+if(isset($_SESSION['authenticated'])) {
+    $userHeader1 = "./userdetails.php?user=" . $_SESSION['username'] ."'>" . $_SESSION['username'];
+    $userHeader2 = "./logout.php'>Log Out";
+} else {
+    $userHeader1 = "./login.php'>Log in";
+    $userHeader2 = "./register.php'>Sign up";
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,9 +32,11 @@
             </a>
         </div>
         <div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">
-            <p><a href="./login.php">Log in</a></p>
+            <p>
+                <a href='<?php echo $userHeader1 ?></a>
+            </p>
         </div>
         <div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">
-            <p><a href="./register.php">Sign up</a></p>
+            <p><a href='<?php echo $userHeader2 ?></a></p>
         </div>
     </div>

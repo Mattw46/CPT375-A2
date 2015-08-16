@@ -141,7 +141,7 @@ function update_password($userID, $newPassword) {
 	$newPassword = md5($newPassword . $timestamp);
 
 	$updatePasswordSql = "UPDATE pword
-	 					  SET pword=".$newPassword."
+	 					  SET pword='".$newPassword."'
 						  WHERE user_id='".$userID."';";
 
 	query($updatePasswordSql);

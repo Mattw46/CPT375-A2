@@ -32,7 +32,16 @@
                     </div>
                     <div class="col-xs-12">
                         <label for="stateField">State:</label>
-                        <input id="stateField" name="state" type="text">
+                        <select id="stateField" name="state" type="text">
+                            <option value="act">Australian Capital Territory</option>
+                            <option value="nsw">New South Wales</option>
+                            <option value="nt">Northern Territory</option>
+                            <option value="qld">Queensland</option>
+                            <option value="sa">South Australia</option>
+                            <option value="tas">Tasmania</option>
+                            <option value="vic">Victoria</option>
+                            <option value="wa">Western Australia</option>
+                        </select>
                     </div>
                     <div class="col-xs-12">
                         <label for="postCodeField">Post Code:</label>

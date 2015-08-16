@@ -5,7 +5,7 @@ require_once 'db_connect.php'; // databse connector goes here
  * Used to perform functions of the web app*/
 require_once 'validate.php';
 
-define("INVALID_USER", 100);
+define("INVALID_USER", 0);
 
 // returns user id if found else return 0
 function login($username, $password) {
@@ -138,7 +138,7 @@ function query($query_string) {
 	try {
 		$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
 		$stmt = $conn->prepare($query_string);
-		echo $stmt->execute();
+		$stmt->execute();
 		$results = $stmt->fetchAll();
 		$stmt = null;
 	}

@@ -62,16 +62,26 @@ function is_admin($user_id) {
 }
 
 // Returns True if user is a professional
-function is_professional() {
+function is_professional($user_id) {
 	if ($user_id <= INVALID_USER) {
 		return false;
 	}
 	// query db for user code
-    $sql = "select user_id, username, user_typ.user_typ_cd, user_typ
-			from user join user_typ on user.user_typ_cd=user_typ.user_typ_cd 
-			where user_id = 1;";
+    $sql = "SELECT user_typ FROM user
+    		RIGHT JOIN user_typ
+    		ON user.user_typ_cd=user_typ.user_typ_cd
+    		WHERE user.user_id='".$user_id."';";
 
-    // Query db and return True if user_typ is Admin
+    // Query db and return True if user_typ is Professional
+    $result = query($sql);
+    
+    if (!empty($result)) {
+    	if ($result[0]["user_typ"] == "Professional") {
+    		return true;
+    	}
+    }
+    // Default value
+    return false;
 }
 
 function get_bids() {

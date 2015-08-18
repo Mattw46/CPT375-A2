@@ -46,19 +46,20 @@ if (isset($_POST)) {
             //set a timestamp for signup_tmstmp field and pword salting
 			$timestamp = date('Y-m-d G:i:s');
 			// temporary values for testing
+			echo trim($_POST["username"]) . "<br />";
 			$details = array(
-				"username" => "user",
-				"first" => "first",
-				"last" => "last",
-				"address1" => "1 some street",
-				"address2" => "",
-				"city" => "Somewhere",
-				"state" => "NSW",
-				"postcode" => "2000",
-				"email" => "user@domain.com",
+				"username" => trim($_POST["username"]),
+				"first" => trim($_POST["firstName"]),
+				"last" => trim($_POST["lastName"]),
+				"address1" => trim($_POST["address1"]),
+				"address2" => trim($_POST["address2"]),
+				"city" => trim($_POST["city"]),
+				"state" => trim($_POST["state"]),
+				"postcode" => trim($_POST["postCode"]),
+				"email" => trim($_POST["email"]),
 				"signup_tmstmp" => $timestamp,
-				"user_typ_cd" => "10",
-				"pword" => md5("Password" . $timestamp)
+				"user_typ_cd" => "1",
+				"pword" => md5(trim($_POST["password"]) . $timestamp)
 			);
 
             $result = register($details);

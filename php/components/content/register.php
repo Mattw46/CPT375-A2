@@ -1,4 +1,4 @@
-<form action="./controller/controller.php" method="post">
+<form action="./controller/controller.php" method="POST">
     <div class="row content" id="registrationContent">
         <div class="col-xs-12 center-xs">
             <h2>Registration</h2>

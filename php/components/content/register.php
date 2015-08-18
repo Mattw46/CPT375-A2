@@ -1,7 +1,22 @@
+<?php
+?>
+
 <form action="./controller/controller.php" method="POST">
     <div class="row content" id="registrationContent">
         <div class="col-xs-12 center-xs">
             <h2>Registration</h2>
+            <?php 
+                if(isset($_SESSION["reg_num_of_errs"]))
+                {
+                    if ($_SESSION["reg_num_of_errs"] > 0)
+                    {
+                        echo "The following error/s occured <br>" ;
+                        echo $_SESSION["reg_array_of_errs"] ."<br>";
+                        unset($_SESSION["reg_num_of_errs"]);
+                        unset($_SESSION["reg_array_of_errs"]);                
+                    }
+                }
+            ?>
         </div>
         <div class="row">
             <div class="col-xs-6 end-xs">
@@ -66,7 +81,7 @@
                     </div>
                     <div class="col-xs-12">
                         <label for="professionField">Professions:</label><br>
-                        Bricklaying: <input id=professionField type="checkbox" name="profession[1]" value="1"><br>
+                        Bricklaying: <input id=professionField type="checkbox" name="git " value="1"><br>
                         Carpentry: <input id=professionField type="checkbox" name="profession[2]" value="1"><br>
                         Carpentry and Joinery: <input id=professionField type="checkbox" name="profession[3]" value="1"><br>
                         Civil Construction: <input id=professionField type="checkbox" name="profession[4]" value="1"><br>
@@ -106,6 +121,8 @@
         </div>
         <div class="col-xs-12 center-xs">
             <button id="signUpButton">Sign up!</button>
+        </div>
+        <div class="col-xs-12 center-xs">
         </div>
     </div>
 </form>

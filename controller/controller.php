@@ -3,7 +3,6 @@
 	 * Dispatches requests to correct page after checking
 	 * if user is authenticated. */
 	session_start();
-
 	require_once '../model/model.php';
 
 echo "Controller<br />";
@@ -23,14 +22,14 @@ if (isset($_POST)) {
             $_SESSION["username"] = $username;
 
 				if(isset($_SESSION['loginHttpReferer'])) {
-					header("location: ..".$_SESSION['loginHttpReferer']);
+					header("location: ../".$_SESSION['loginHttpReferer']);
 				} else {
-					header("location: ./");
+					header("location: ../");
 				}
 			}
 			else {
 				//echo "Not Authorised<br/>";
-				header("location: ../php/login.php");
+				header("location: ../login.php");
 			}
 		}
 		else if ($sender == "/main.php") {
@@ -63,8 +62,15 @@ if (isset($_POST)) {
 			);
 
             $result = register($details);
-			// if $result true redirect to a success page
-			// else redirect back to register with error
+            if($result){
+            	header("location: ../login.php");
+    		}else
+    		{
+    			
+    			header("location: ../register.php");
+    		}
+
+			
 		}
 		else {
 			// redirect user back to form and indicate error

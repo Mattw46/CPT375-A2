@@ -9,6 +9,7 @@ define("INVALID_USER", 0);
 
 // returns user id if found else return 0
 function login($username, $password) {
+
 	if (validate_login($username, $password) == True) {
 		
 		$sql = "SELECT username, pword, user.user_id, signup_tmstmp 
@@ -92,6 +93,10 @@ function bid() {
 	insert();
 }
 
+function get_trades(){
+
+}
+
 /*
 	Takes registration details and validates
 	If valid attempts to write to database and returns true
@@ -128,6 +133,7 @@ function register($details) {
         return true;
 	}
 	else {
+			
 		return false;
 	}
 

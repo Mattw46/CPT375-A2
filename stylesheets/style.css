@@ -1,0 +1,183 @@
+@import "external/normalize.css";
+@import "external/jquery-ui.css";
+@import "external/jquery-ui.theme.min.css";
+@import "external/flexboxgrid.css";
+body {
+  margin: 0;
+  padding: 0;
+}
+.container-fluid {
+  padding: 0 0.5rem;
+}
+#masthead {
+  border-top: solid 20px #f9e17f;
+  background-color: #ffffff;
+}
+#masthead #logo {
+  padding-top: 3px;
+}
+#masthead #place-job {
+  padding-top: 13px;
+  color: #f1f1f1;
+}
+#masthead #place-job button {
+  background-color: #9dcf63;
+  border: none;
+  font-size: 1.5em;
+  font-weight: 700;
+  height: 50px;
+}
+#masthead .log-in-sign-up p {
+  color: #000;
+}
+#search {
+  color: #000000;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #f9e17f;
+  font-size: 1.3em;
+}
+#search input,
+#search select {
+  height: 37px;
+}
+#search #search-button {
+  border: 2px solid #ffffff;
+  font-weight: 700;
+  height: 39px;
+  background-color: #fef9a9;
+}
+#search input,
+#search button,
+#search select {
+  width: 100%;
+  box-shadow: 1px 1px 3px #000000;
+}
+#search input,
+#search select {
+  border: none;
+  padding-left: 10px;
+}
+#search p {
+  margin-bottom: 2px;
+}
+#footer {
+  background-color: #f9e17f;
+  border-top: solid 15px #f1f1f1;
+  border-bottom: solid 30px #ffffff;
+}
+.striped {
+  width: 100%;
+  box-shadow: 1px 1px 1px #000000;
+  margin-bottom: 22px;
+}
+.striped thead tr {
+  background-color: #fef9a9;
+}
+.striped tbody tr {
+  background-color: #fffcd4;
+}
+.striped tbody tr:nth-child(even) {
+  background-color: #fefbbf;
+}
+.striped th,
+.striped td {
+  padding: 3px;
+  font-size: 1.13em;
+  height: 26px;
+  border: solid 1px #000000;
+}
+.tableTitle {
+  margin-top: 22px;
+  margin-bottom: 1px;
+}
+.striped td.suspend {
+  background-color: red;
+  width: 85px;
+  padding-left: 16px;
+}
+.striped td.allow {
+  background-color: green;
+  width: 49px;
+  padding-left: 10px;
+}
+#searchresultsrefine {
+  background-color: #f9e17f;
+  font-weight: 700;
+  font-size: 1.05em;
+}
+#searchresultsrefine #sortBy {
+  width: 300px;
+}
+#searchresultsrefine #auctionsPerPage {
+  width: 90px;
+}
+#searchresultsrefine .ui-spinner-input {
+  width: 50px;
+}
+#searchresultscontent .listing {
+  padding: 25px;
+}
+#searchresultscontent .listing .inner {
+  padding: 0;
+  background-color: #fef9a9;
+  padding-bottom: 10px;
+}
+#searchresultscontent .listing .inner img {
+  width: 100%;
+}
+#searchresultscontent .listing .inner p {
+  margin: 0;
+}
+#searchresultscontent .listing .inner .listing-title {
+  font-weight: 700;
+}
+#rules ul {
+  list-style-type: none;
+}
+#userAdminPanel h2 {
+  margin-bottom: 0px;
+  margin-top: 15px;
+}
+.leftMenu {
+  padding-top: 14px;
+}
+@media screen and (min-width: 768px) {
+  .container-fluid {
+    width: 90%;
+  }
+  .container-fluid .leftMenu {
+    border-right: solid 5px #f1f1f1;
+  }
+  #masthead {
+    padding-top: 5px;
+  }
+  #masthead .log-in-sign-up p {
+    font-size: 1.83em;
+  }
+}
+@media screen and (min-width: 992px) {
+  .container-fluid {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .container-fluid {
+    width: 65%;
+  }
+}
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+body .container-fluid {
+  padding: 0 0.5rem;
+}
+body .container-fluid .content {
+  box-sizing: border-box;
+  border: solid 5px #f1f1f1;
+}
+body .container-fluid .content .leftMenu {
+  background-color: #ffffff;
+}

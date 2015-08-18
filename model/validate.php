@@ -4,6 +4,7 @@
  * Should be used before adding inputs into the database
  */
 
+
 function validate_login($username, $password) {
 	
 	if (valid_username($username) && valid_password($password)) {
@@ -20,6 +21,8 @@ function valid_username($username) {
 		return true;
 	}
 	else {
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Invalid username - allowed letter A-Z or a-z and must be greater the 3 letters total </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
 		return false;
 	}
 }
@@ -30,12 +33,16 @@ function valid_password($password) {
 		return true;
 	}
 	else {
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Invalid password - allowed letter A-Z or a-z, numbers 1 -9 and greater the 6 and less than 18 letters total </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
 		return false;
 	}
 }
 
 // Checks values for a new registration and returns true if validated
 function validate_registration($details) {
+	$_SESSION["reg_array_of_errs"] = '';
+	$_SESSION["reg_num_of_errs"] = 0;
 	if (valid_username($details["username"]) && valid_name($details["first"]) 
 			&& valid_name($details["last"]) && valid_email($details["email"])
 			&& valid_address($details)) {
@@ -43,6 +50,7 @@ function validate_registration($details) {
 		return true;
 	}
 	else {
+
 		return false;
 	}
 }
@@ -55,12 +63,22 @@ function validate_auction() {
 function valid_name($name) {
 	$regex = "/^[A-Za-z-]{3,}$/";
 	$result = preg_match($regex, $name);
+	if(!$result)
+	{
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Invalid first/last Name - allowed letter A-Z or a-z and greater the 3 letters total </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+	}
 	return $result;
 }
 
 function valid_email($email) {
 	$regex = "/^[a-z0-9_-]{4,}@{1}[a-z-]{3,}\.{1}([a-z\.]{3,})?[a-z]{3}(.[a-z]{2})?$/";
 	$result = preg_match($regex, $email);
+	if(!$result)
+	{
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Not a valid e-mail address </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+	}
 	return $result;
 }
 
@@ -70,16 +88,32 @@ function valid_address($details) {
 	$regex_state = "/^[A-Za-z\.]{2,}$/";
 	
 	$address1 = preg_match($regex_address, $details["address1"]);
+	if(!$address1)
+	{
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"]  + 1 .") Address can only have letters A-Z, a-z and numbers 0-9 with total letters and numbers greater than 9 </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+	}
 	if ($details["address2"] == "" || preg_match($regex_address, $details["address2"])) {
 		$address2 = true;
 	}
 	else {
 		$address2 = false;
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] .  $_SESSION["reg_num_of_errs"] + 1 .") Address2 can only have letters A-Z, a-z and numbers 0-9 with total letters and numbers greater than 9 </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
 	}
 	
 	$postcode = preg_match($regex_postcode, $details["postcode"]);
+	if(!$postcode)
+	{
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Invalid postcode number </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+	}
 	$state = preg_match($regex_state, $details["state"]);
-	
+	if(!$state)
+	{
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_num_of_errs"] + 1 .") Invalid state </br>";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+	}
 	// If all pass return true
 	if ($address1 && $address2 && $postcode && $state) {
 		return true;

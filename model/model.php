@@ -94,7 +94,9 @@ function bid() {
 }
 
 function get_trades(){
-
+   $sql = "SELECT trade_typ_cd, trade_typ FROM trade_typ";
+   $trades = query($sql);
+   return $trades;
 }
 
 /*

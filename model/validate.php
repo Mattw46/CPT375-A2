@@ -16,6 +16,18 @@ function validate_login($username, $password) {
 }
 
 function valid_username($username) {
+
+	$query_string = "SELECT user.username
+						FROM user
+						WHERE username = $username;";
+	$result = query($query_string); 
+
+	if ($result != ''){
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Username already exists in Database. Please chose another";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+		return false;
+	}
+
 	$regex = "/^[a-zA-Z0-9_-]{3,16}$/";
 	if ($username != "" && preg_match($regex, $username) == 1) {
 		return true;

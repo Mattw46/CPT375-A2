@@ -1,7 +1,15 @@
+<?php require_once '../model/model.php'; ?>
 <div class="row content" id="main">
     <div class="col-sm-3 leftMenu" id="categories">
         <h3>Categories</h3>
         <ul>
+            <?php
+            $tradesList = get_trades();
+            foreach($tradesList as $row){
+               echo '<li><a href="./search.php?categoryId=' . $row[0] . '">' . $row[1] . '</a></li>';
+            }
+            ?>
+            <!--
             <li><a href="./search.php?categoryId=1">Bricklaying</a></li>
             <li><a href="./search.php?categoryId=2">Carpentry</a></li>
             <li><a href="./search.php?categoryId=3">Carpentry and Joinery</a></li>
@@ -32,7 +40,8 @@
             <li><a href="./search.php?categoryId=28">Upholstery</a></li>
             <li><a href="./search.php?categoryId=29">Wood Machining</a></li>
             <li><a href="./search.php?categoryId=30">Engineering (Electrical/Electronic)</a></li>
-        </ul>
+            -->
+         </ul>
     </div>
     <div class="col-sm-9" id="site-description">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi corporis debitis esse officia

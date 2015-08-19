@@ -93,6 +93,17 @@ function bid() {
 	insert();
 }
 
+function getJobs(term, state, category, minRating, minBid, maxBid, numOfResults, pageNumber, sortBy) {
+	// returns an arrau of jobs jobID, shortDescription, currentBid, endsInTime, totalBids
+	// all parameters should be allowed to be omitted.
+	//defaults: numOfResults=12, sortBy=ending soonest
+}
+
+function getJobDetails(jobId) {
+	/*returns array containing the job's: shortDescription, longDescription, posterPostCode, currentBid, 
+	 * endsInTimeString, totalBids, posterUsername, posterId*/
+}
+
 function get_trades(){
    $sql = "SELECT trade_typ_cd, trade_typ FROM trade_typ";
    $trades = query($sql);

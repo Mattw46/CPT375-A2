@@ -1,3 +1,4 @@
+<?php require_once './model/model.php'; ?>
 <div class="row content">
     <div class="col-xs-12 col-sm-3 leftMenu center-xs">
         <a href="./userdetails.php?username='<?php ?>'">User Admin Panel</a>
@@ -20,13 +21,20 @@
                 <div class="col-xs-12">
                     <label for="addJobCategory">Category of work:</label>
                     <select id="addJobCategory">
-                        <option value="gardening">Gardening</option>
+			<?php
+                           $tradesList = get_trades();
+                           foreach($tradesList as $row){
+                              echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+                           }
+        	        ?>
+                        <!--<option value="gardening">Gardening</option>
                         <option value="electrical">Electrical</option>
                         <option value="plumbing">Plumbing</option>
                         <option value="construction">Construction</option>
                         <option value="handy man jobs">Handy man jobs</option>
                         <option value="tiling">Tiling</option>
                         <option value="cleaner">Cleaner</option>
+                        -->
                     </select>
                 </div>
                 <div class="col-xs-12">

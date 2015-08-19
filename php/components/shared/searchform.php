@@ -1,3 +1,4 @@
+<?php require_once './model/model.php'; ?>
 <form>
     <div class="row" id="search">
         <div class="col-xs-9">
@@ -24,7 +25,13 @@
             <p>Scope by Category</p>
             <select id="categoryId">
                 <option value="all">All Categories</option>
-                <option value="1">Bricklaying</option>
+                <?php
+                   $tradesList = get_trades();
+                   foreach($tradesList as $row){
+                      echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+                   }
+                ?>
+                <!--<option value="1">Bricklaying</option>
                 <option value="2">Carpentry</option>
                 <option value="3">Carpentry and Joinery</option>
                 <option value="4">Civil Construction</option>
@@ -54,6 +61,7 @@
                 <option value="28">Upholstery</option>
                 <option value="29">Wood Machining</option>
                 <option value="30">Engineering (Electrical/Electronic)</option>
+                -->
             </select>
         </div>
     </div>

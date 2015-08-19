@@ -153,7 +153,7 @@ function add_auction($details) {
    $auctionSQL .= "'," . $details['jobLength'] . "," . $details['startbid'];
    $auctionSQL .= ", NULL, TRUE)";
 	
-   if(insert($auctionSQL){
+   if(insert($auctionSQL)){
          return true;
    }else{
       return false;

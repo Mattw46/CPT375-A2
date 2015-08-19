@@ -6,7 +6,8 @@
 
 
 function validate_login($username, $password) {
-	
+	$_SESSION["reg_array_of_errs"] = '';
+	$_SESSION["reg_num_of_errs"] = 0;
 	if (valid_username($username) && valid_password($password)) {
 		return True;
 	}
@@ -16,17 +17,6 @@ function validate_login($username, $password) {
 }
 
 function valid_username($username) {
-
-	$query_string = "SELECT user.username
-						FROM user
-						WHERE username = $username;";
-	$result = query($query_string); 
-
-	if ($result != ''){
-		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Username already exists in Database. Please chose another";
-		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
-		return false;
-	}
 
 	$regex = "/^[a-zA-Z0-9_-]{3,16}$/";
 	if ($username != "" && preg_match($regex, $username) == 1) {
@@ -53,12 +43,11 @@ function valid_password($password) {
 
 // Checks values for a new registration and returns true if validated
 function validate_registration($details) {
-	$_SESSION["reg_array_of_errs"] = '';
-	$_SESSION["reg_num_of_errs"] = 0;
+	
 	if (valid_username($details["username"]) && valid_name($details["first"]) 
 			&& valid_name($details["last"]) && valid_email($details["email"])
 			&& valid_address($details)) {
-			
+		//echo "all ok";
 		return true;
 	}
 	else {

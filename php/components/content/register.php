@@ -23,7 +23,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <label for="usernameField">Username:</label>
-                        <input id="usernameField" name="username" type="text">
+                        <input id="usernameField" name="username" type="text" value="<?php if(isset($_POST["username"])){echo trim($_POST["username"]);} ?>">
+
                     </div>
                     <div class="col-xs-12">
                         <label for="firstNameField">First Name:</label>

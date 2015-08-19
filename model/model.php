@@ -17,7 +17,7 @@ function login($username, $password) {
 			WHERE username='".$username."';";
 		
 		$results = query($sql);
-		
+
 		if (!empty($results)) {
 			if ($results[0]['username'] == $username) {
 			
@@ -25,6 +25,7 @@ function login($username, $password) {
 				$password = md5($password . $results[0]['signup_tmstmp']);
 
 				if ($results[0]['pword'] ==  $password) {
+					echo "password passed";
 					return $results[0]['user_id']; 
 				}
 			}
@@ -116,8 +117,15 @@ function get_trades(){
 	If not valid or insert fails returns false
 */
 function register($details) {
+	$_SESSION["reg_array_of_errs"] = '';
+	$_SESSION["reg_num_of_errs"] = 0;
 	$valid = validate_registration($details);
-
+	if($valid)
+	{
+		if(!(prevent_duplicate_username($details)))
+			$valid = false;
+	}
+	
     if ($valid) {
 		// form query
 		$userSql =  "INSERT INTO user ";
@@ -133,14 +141,14 @@ function register($details) {
 		echo $userSql;
         $success = insert($userSql);
 
-        $idSql =  "SELECT user_id FROM user WHERE username = " . $details['username'];
-		$idSql .= " AND signup_tmstmp = " . $details['signup_tmstmp'];
+        $idSql =  "SELECT user_id FROM user WHERE username = '" . $details['username'] . "';";
 
+		$id = query($idSql);
 	
         $pwordSql = "INSERT INTO pword ";
 		$pwordSql .= "(user_id, pword) ";
-		$pwordSql .= "VALUES ('" . $details['username'] . "','" . $details['pword'] . "')";
-
+		$pwordSql .= "VALUES ('" . $id[0]["user_id"] . "','" . $details['pword']. "')";
+		echo $pwordSql;
         $success = insert($pwordSql);
 
         return true;
@@ -150,6 +158,19 @@ function register($details) {
 		return false;
 	}
 
+}
+function prevent_duplicate_username($details) {
+	$query_string = "SELECT user.username
+						FROM user
+						WHERE username =";
+	$query_string .= "'" . $details['username'] ."';";
+	$result = query($query_string); 
+	if ($result){
+		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Username already exists in Database. Please chose another";
+		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
+		return false;
+	}
+	return true;
 }
 
 function add_auction($details) {

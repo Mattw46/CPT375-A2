@@ -16,10 +16,11 @@ if (isset($_POST)) {
 			$username = $_POST["username"];
 			$password = $_POST["password"];
 			$id = login($username, $password);
-
+			echo $id;
         if ($id > 0) {
 			$_SESSION["authenticated"] = $id;
             $_SESSION["username"] = $username;
+            echo "was here";
 
 				if(isset($_SESSION['loginHttpReferer'])) {
 					header("location: ../".$_SESSION['loginHttpReferer']);
@@ -29,7 +30,7 @@ if (isset($_POST)) {
 			}
 			else {
 				//echo "Not Authorised<br/>";
-				header("location: ../login.php");
+				//header("location: ../login.php");
 			}
 		}
 		else if ($sender == "/main.php") {
@@ -63,11 +64,11 @@ if (isset($_POST)) {
 
             $result = register($details);
             if($result){
-            	header("location: ../login.php");
+            	//header("location: ../login.php");
     		}else
     		{
     			
-    			header("location: ../register.php");
+    			//header("location: ../register.php");
     		}
 
 			

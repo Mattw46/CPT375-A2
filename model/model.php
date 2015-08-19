@@ -139,8 +139,23 @@ function register($details) {
 
 }
 
-function add_auction() {
-	insert();
+function add_auction($details) {
+   $auctionSQL  = "INSERT INTO listing ";
+   $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
+   $auctionSQL .= ", list_typ_cd, list_addr_id, shrt_descn, lng_descn";
+   $auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
+   $auctionSQL .= "VALUES ('" . $details['userID'] . "'," . $details['start'];
+   $auctionSQL .= ", DATE_ADD(" . $details['start'] . ", INTERVAL ";
+   $auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
+   $auctionSQL .= ", NULL, '" . $detils['summary'] . "','" . $details['description'];
+   $auctionSQL .= "'," . $details['jobLength'] . "," . $details['startbid'];
+   $auctionSQL .= ", NULL, TRUE)";
+	
+   if(insert($auctionSQL){
+         return true;
+   }else{
+      return false;
+   }
 }
 
 function activate_auction() {

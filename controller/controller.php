@@ -72,6 +72,28 @@ if (isset($_POST)) {
 
 			
 		}
+		else if ($sender == "/addjob.php") {
+		   $jobDetails = array(
+		      "userID" => $_POST["userID"],
+		      "start" => date('Y-m-d G:i:s'),
+		      "auctionLength" => 7,
+		      "auctionType" => 1,
+		      "summary" => $_POST["title"],
+		      "description" => $_POST["description"],
+		      "jobLength" => $_POST["jobLength"],
+		      "startbid" => $_POST["startbid"]
+		      );
+		   $result = add_auction($jobDetails);
+		   if($result){
+		       header("location: ../job.php");  
+		   }else{
+		       header("location: ../addjob.php");  
+		   }
+		   
+		      
+		   }
+		   
+		}
 		else {
 			// redirect user back to form and indicate error
 		}

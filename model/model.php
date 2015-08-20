@@ -111,6 +111,12 @@ function get_trades(){
    return $trades;
 }
 
+function get_userID($username){
+   $sql = "SELECT user_id FROM user WHERE username = '". $username."'";
+   $userid = query_single($sql);
+   return $userid;
+}
+
 /*
 	Takes registration details and validates
 	If valid attempts to write to database and returns true
@@ -176,11 +182,11 @@ function add_auction($details) {
    $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
    $auctionSQL .= ", list_typ_cd, list_addr_id, shrt_descn, lng_descn";
    $auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
-   $auctionSQL .= "VALUES ('" . $details['userID'] . "'," . $details['start'];
-   $auctionSQL .= ", DATE_ADD(" . $details['start'] . ", INTERVAL ";
+   $auctionSQL .= "VALUES (" . $details['userID'] . ",'" . $details['start'];
+   $auctionSQL .= "', DATE_ADD('" . $details['start'] . "', INTERVAL ";
    $auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
-   $auctionSQL .= ", NULL, '" . $detils['summary'] . "','" . $details['description'];
-   $auctionSQL .= "'," . $details['jobLength'] . "," . $details['startbid'];
+   $auctionSQL .= ", NULL, '" . $details['summary'] . "','" . $details['description'];
+   $auctionSQL .= "'," . $details['joblength'] . "," . $details['startbid'];
    $auctionSQL .= ", NULL, TRUE)";
 	
    if(insert($auctionSQL)){
@@ -240,6 +246,22 @@ function query($query_string) {
     return $results;
 }
 
+function query_single($query_string) {
+	try {
+		$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
+		$stmt = $conn->prepare($query_string);
+		$stmt->execute();
+		$results = $stmt->fetchColumn();
+		$stmt = null;
+	}
+	catch (PDOException $e) {
+		echo "Error: ".$e->getMessage();
+		return null;
+	}
+
+    return $results;
+}
+
 function update($query_string) {
 	$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
 	$stmt = $conn->prepare($query_string);
@@ -271,7 +293,7 @@ function insert($query_string) {
 	if ($stmt->errorCode() == 0) {
 		return true;
 	}
-	else {
+	else {  echo'<script language="javascript">alert("error code:'. print_r($stmt->errorInfo()) .'")</script>';
 		return false;
 	}
 

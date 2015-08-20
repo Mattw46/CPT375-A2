@@ -75,20 +75,21 @@ if (isset($_POST)) {
 		}
 		else if ($sender == "/addjob.php") {
 		   $jobDetails = array(
-		      "userID" => $_POST["userID"],
+		      "userID" => get_userID($_SESSION["username"]),
 		      "start" => date('Y-m-d G:i:s'),
 		      "auctionLength" => 7,
 		      "auctionType" => 1,
-		      "summary" => $_POST["title"],
+		      "summary" => $_POST["summary"],
 		      "description" => $_POST["description"],
-		      "jobLength" => $_POST["jobLength"],
+                      "jobtype" => $_POST["jobtype"],
+		      "joblength" => 3, //$_POST["joblength"],
 		      "startbid" => $_POST["startbid"]
 		      );
 		   $result = add_auction($jobDetails);
 		   if($result){
 		       header("location: ../job.php");  
 		   }else{
-		       header("location: ../addjob.php");  
+		       //header("location: ../addjob.php");  
 		   }
 		   
 		      

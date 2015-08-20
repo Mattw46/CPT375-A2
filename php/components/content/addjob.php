@@ -9,40 +9,33 @@
         <div class="row center-xs">
             <h2 class="col-xs-12 center-xs">Add job!</h2>
 
-            <form>
+            <form action="./controller/controller.php" method="post">
                 <div class="col-xs-12">
                     <label for="addJobSummary">Job Summary:</label>
-                    <input id="addJobSummary" type="text">
+                    <input id="addJobSummary" type="text" name="summary">
                 </div>
                 <div class="col-xs-12">
                     <label for="addJobDescription">Job Description:</label>
-                    <textarea id="addJobDescription" rows="3"></textarea>
+                    <textarea id="addJobDescription" rows="3" name="description"></textarea>
                 </div>
                 <div class="col-xs-12">
                     <label for="addJobCategory">Category of work:</label>
-                    <select id="addJobCategory">
+                    <select id="addJobCategory" name="jobtype">
 			<?php
                            $tradesList = get_trades();
                            foreach($tradesList as $row){
                               echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
                            }
         	        ?>
-                        <!--<option value="gardening">Gardening</option>
-                        <option value="electrical">Electrical</option>
-                        <option value="plumbing">Plumbing</option>
-                        <option value="construction">Construction</option>
-                        <option value="handy man jobs">Handy man jobs</option>
-                        <option value="tiling">Tiling</option>
-                        <option value="cleaner">Cleaner</option>
-                        -->
+                        
                     </select>
                 </div>
                 <div class="col-xs-12">
                     <label for="startBidAmountSpinner">Starting bid:</label>
-                    <input id="startBidAmountSpinner" name="startBidAmountSpinner" value="100.00">
+                    <input id="startBidAmountSpinner" name="startbid" value="100.00">
                 </div>
                 <div class="col-xs-12">
-                    <label for="addJobDurationSpinner">Job Duration: <span id="addJobDurationDisplayAmount">3</span>
+                    <label for="addJobDurationSpinner">Job Duration: <span id="addJobDurationDisplayAmount" name="joblength">3</span>
                         days</label>
 
                     <div id="addJobDurationSpinner"></div>

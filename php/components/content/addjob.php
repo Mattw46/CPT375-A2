@@ -35,10 +35,10 @@
                     <input id="startBidAmountSpinner" name="startbid" value="100.00">
                 </div>
                 <div class="col-xs-12">
-                    <label for="addJobDurationSpinner">Job Duration: <span id="addJobDurationDisplayAmount" name="joblength">3</span>
+                    <label for="addJobDurationSpinner">Job Duration: <span id="addJobDurationDisplayAmount">3</span>
                         days</label>
-
                     <div id="addJobDurationSpinner"></div>
+                    <input type="hidden" name="joblength" value="3">
                 </div>
                 <div class="col-xs-12" id="addJobButton">
                     <button>Place Job</button>

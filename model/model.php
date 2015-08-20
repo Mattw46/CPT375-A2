@@ -138,7 +138,6 @@ function register($details) {
 		$userSql .= "'" . $details['email'] . "','" . $details['signup_tmstmp'] . "',";
 		$userSql .= "'" . $details['user_typ_cd'] . "')";
 
-		echo $userSql;
         $success = insert($userSql);
 
         $idSql =  "SELECT user_id FROM user WHERE username = '" . $details['username'] . "';";
@@ -148,7 +147,6 @@ function register($details) {
         $pwordSql = "INSERT INTO pword ";
 		$pwordSql .= "(user_id, pword) ";
 		$pwordSql .= "VALUES ('" . $id[0]["user_id"] . "','" . $details['pword']. "')";
-		echo $pwordSql;
         $success = insert($pwordSql);
 
         return true;
@@ -270,9 +268,7 @@ function insert($query_string) {
 	$conn = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PW);
 	$stmt = $conn->prepare($query_string);
 	$stmt->execute();
-	echo "was here 2<br />";
 	if ($stmt->errorCode() == 0) {
-		echo "was here 3<br />";
 		return true;
 	}
 	else {

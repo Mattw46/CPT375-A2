@@ -30,7 +30,7 @@ if (isset($_POST)) {
 			}
 			else {
 				//echo "Not Authorised<br/>";
-				//header("location: ../login.php");
+				header("location: ../login.php");
 			}
 		}
 		else if ($sender == "/main.php") {
@@ -64,11 +64,11 @@ if (isset($_POST)) {
 
             $result = register($details);
             if($result){
-            	//header("location: ../login.php");
+            	header("location: ../login.php");
     		}else
     		{
     			
-    			//header("location: ../register.php");
+    			header("location: ../register.php");
     		}
 
 			

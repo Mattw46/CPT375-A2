@@ -115,18 +115,61 @@ function getJobDetails($jobId) {
 	return query($sql);
 }
 
+/* Get a list of the trade options */ 
 function get_trades(){
    $sql = "SELECT trade_typ_cd, trade_typ FROM trade_typ";
    $trades = query($sql);
    return $trades;
 }
 
+/* Get the userid from username */
 function get_userID($username){
    $sql = "SELECT user_id FROM user WHERE username = '". $username."'";
    $userid = query_single($sql);
    return $userid;
 }
 
+/* Get a user's professional feedback rating */
+function getProFeedback($userID){
+   $sql  = "SELECT AVG(IFNULL(rating,0)) FROM user ";
+   $sql .= "LEFT JOIN feedback ON user.user_id = feedback.pro_user_id ";
+   $sql .= "WHERE user.user_id= '". $userID."' GROUP BY user.user_id";
+   $fb = query_single($sql);
+   return $fb;
+}
+
+/* Get a user's listing feedback rating */
+function getFeedback($userID){
+   $sql  = "SELECT AVG(IFNULL(rating,0)) FROM user ";
+   $sql .= "LEFT JOIN feedback ON user.user_id = feedback.list_user_id ";
+   $sql .= "WHERE user.user_id= '". $userID."' GROUP BY user.user_id";
+   $fb = query_single($sql);
+   return $fb;
+}
+
+/* Get the number of auctions a user has posted */
+function sumPostedAuctions($userID){
+   $sql  = "SELECT COUNT(*) AS cnt FROM listing ";
+   $sql .= "WHERE list_user_id= '". $userID."' GROUP BY list_user_id";
+   $count = query_single($sql);
+   if($count){
+      return $count;
+   } else {
+      return 0;
+   }
+}
+
+/* Get the number of bids a user has made */
+function getBids($userID){
+   $sql  = "SELECT COUNT(*) AS cnt FROM bids ";
+   $sql .= "WHERE bid_user_id= '". $userID."' GROUP BY bid_user_id";
+   $count = query_single($sql);
+   if($count){
+      return $count;
+   } else {
+      return 0;
+   }
+}
 /*
 	Takes registration details and validates
 	If valid attempts to write to database and returns true

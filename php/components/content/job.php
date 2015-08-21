@@ -1,12 +1,10 @@
-<?php ?>
-
-<?php $job = "" ?>
+<?php require_once './model/model.php'; ?>
 <div class="row content" id="userDetailsContent">
     <div class="col-xs-12 center-xs" id="userDetails">
         <div id="job">
             <h2 id="jobTitle">Dig this hole</h2>
 
-            <p id="jobPostedBy">Posted by <a href="#"><span id="jobPoster"><?php echo $user['username']; ?></span></a>
+            <p id="jobPostedBy">Posted by <a href="#"><span id="jobPoster"><?php echo $_SESSION["username"]; ?></span></a>
             </p>
             <img src="http://placehold.it/300x225">
 

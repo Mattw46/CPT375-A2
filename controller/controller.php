@@ -46,7 +46,6 @@ if (isset($_POST)) {
             //set a timestamp for signup_tmstmp field and pword salting
 			$timestamp = date('Y-m-d G:i:s');
 			// temporary values for testing
-			echo trim($_POST["username"]) . "<br />";
 			$details = array(
 				"username" => trim($_POST["username"]),
 				"first" => trim($_POST["firstName"]),
@@ -87,9 +86,10 @@ if (isset($_POST)) {
 		      );
 		   $result = add_auction($jobDetails);
 		   if($result){
-		       header("location: ../job.php");  
+		       header("location: ../job_posted_ok.php");  
+		       $_SESSION["posted_ok_details"] = $jobDetails;
 		   }else{
-		       //header("location: ../addjob.php");  
+		       header("location: ../add_job_error.php");  
 		   }
 		   
 		      

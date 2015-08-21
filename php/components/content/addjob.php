@@ -1,4 +1,8 @@
-<?php require_once './model/model.php'; ?>
+<?php require_once './model/model.php'; 
+
+
+?>
+
 <div class="row content">
     <div class="col-xs-12 col-sm-3 leftMenu center-xs">
         <a href="./userdetails.php?username='<?php ?>'">User Admin Panel</a>

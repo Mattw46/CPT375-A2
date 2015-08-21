@@ -18,7 +18,8 @@
     <?php 
     //update to place dropdown box for how many items to display
     $latestJobs = getLatestJobListing(20);
-    foreach($latestJobs as $count => $db_array){ ?>
+    foreach($latestJobs as $count => $db_array){ 
+        if($db_array['visible']) {?>
                 <div class="col-xs-6 center-xs col-sm-4 col-lg-3 listing">
                     <div class="inner">
                         <img src="http://placehold.it/200x150">
@@ -49,11 +50,15 @@
                                 $totalbid= $totalB[0][0];
                             echo $totalbid;
                             ?>
+                            <form method="GET" action="/job.php">
+                                <input type ="hidden" name = "listing_id" value = <?php echo $db_array['listing_id']; ?> />
+                                <button type ="submot">Place bid</button>
+                            </form>
                         </span></p>
                     </div>
                 </div>
-                <?php } ?>
+        <?php }
+            } ?>
             </div>
         </div>
-    
 </div>

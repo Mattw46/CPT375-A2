@@ -98,7 +98,7 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 	// all parameters should be allowed to be omitted.
 	//defaults: numOfResults=12, sortBy=ending soonest
 }
-function getLatestetJobListing($numJobs){
+function getLatestJobListing($numJobs){
 	$lstid = "SELECT MAX(listing_id) FROM listing";
 
 	$lastid = query($lstid);
@@ -111,15 +111,13 @@ function getLatestetJobListing($numJobs){
 		$arrayquery = "SELECT * FROM listing
 				   WHERE listing_id <= '". $lastid[0][0]."'
 				   AND listing_id >= '".$startid ."'
-				   ORDER BY listing_id DESC;";
-
-		
-		return query($arrayquery);
-		
+				   ORDER BY listing_id DESC;";		
+		return query($arrayquery);	
 	}
 	else
 		return 0;
 }
+
 
 function getJobDetails($jobId) {
 	/*returns array containing the job's: shortDescription, longDescription, posterPostCode, currentBid, 
@@ -191,6 +189,26 @@ function getBids($userID){
       return 0;
    }
 }
+function getCurrentBid($listingId) {
+	$bidQry = "SELECT bids.bid_amnt AS bid 
+				FROM bids
+				where bids.listing_id ='" .$listingId."'
+				ORDER BY bid_id DESC;";
+	$result = query($bidQry);
+	if(empty($result))
+		return 0;
+	else
+		return result;
+}
+function getTotalBids($listingId) {
+
+	$bidQry = "SELECT SUM(bids.bid_id) 
+				FROM bids
+				where bids.listing_id ='" .$listingId. "';";
+	$result = query($bidQry);
+
+	return $result;
+	}
 /*
 	Takes registration details and validates
 	If valid attempts to write to database and returns true

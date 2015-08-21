@@ -25,7 +25,6 @@ function login($username, $password) {
 				$password = md5($password . $results[0]['signup_tmstmp']);
 
 				if ($results[0]['pword'] ==  $password) {
-					echo "password passed";
 					return $results[0]['user_id']; 
 				}
 			}
@@ -98,6 +97,28 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 	// returns an arrau of jobs jobID, shortDescription, currentBid, endsInTime, totalBids
 	// all parameters should be allowed to be omitted.
 	//defaults: numOfResults=12, sortBy=ending soonest
+}
+function getLatestetJobListing($numJobs){
+	$lstid = "SELECT MAX(listing_id) FROM listing";
+
+	$lastid = query($lstid);
+	if (!empty($lastid)) {
+		$startid = ($lastid[0][0] - $numJobs);
+
+		if ($startid < 1)
+			$startid = 1;
+
+		$arrayquery = "SELECT * FROM listing
+				   WHERE listing_id <= '". $lastid[0][0]."'
+				   AND listing_id >= '".$startid ."'
+				   ORDER BY listing_id DESC;";
+
+		
+		return query($arrayquery);
+		
+	}
+	else
+		return 0;
 }
 
 function getJobDetails($jobId) {

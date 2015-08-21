@@ -86,8 +86,8 @@ if (isset($_POST)) {
 		      );
 		   $result = add_auction($jobDetails);
 		   if($result){
-		       header("location: ../job_posted_ok.php");  
-		       $_SESSION["posted_ok_details"] = $jobDetails;
+		   	   $_SESSION["posted_ok_details"] = $jobDetails;
+		       header("location: ../job_posted_ok.php");       
 		   }else{
 		       header("location: ../add_job_error.php");  
 		   }

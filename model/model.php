@@ -89,8 +89,24 @@ function get_bids() {
 	query();
 }
 
-function bid() {
-	insert();
+function bid($details) {
+
+	if ($details['bid_amnt'] <= getCurrentBid($details['listing_id']))
+	{
+		return false;
+	}
+	echo $details['bid_user_id'];
+	$bidSQL  = "INSERT INTO bids ";
+    $bidSQL .= "(bid_user_id, listing_id, bid_amnt)";
+    $bidSQL .= "VALUES (" . $details['bid_user_id'] . ",'" . $details['listing_id'];
+    $bidSQL .= "'," . $details['bid_amnt'] . ")";
+	echo $bidSQL;
+	$success = insert($bidSQL);
+
+ 	if ($success)
+ 		return true;
+ 	else
+ 		return false;
 }
 
 function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy) {
@@ -118,7 +134,13 @@ function getLatestJobListing($numJobs){
 		return 0;
 }
 
+function getListingDetails($listingId){
+	$listDetail = "SELECT * from listing
+				WHERE listing_id = '".$listingId."';";
+	$result = query($listDetail);
+	return $result;
 
+}
 function getJobDetails($jobId) {
 	/*returns array containing the job's: shortDescription, longDescription, posterPostCode, currentBid, 
 	 * endsInTimeString, totalBids, posterUsername, posterId*/
@@ -145,6 +167,12 @@ function get_trades(){
 function get_userID($username){
    $sql = "SELECT user_id FROM user WHERE username = '". $username."'";
    $userid = query_single($sql);
+   return $userid;
+}
+
+function get_userName($userId){
+   $sql = "SELECT username FROM user WHERE user_id = '". $userId."'";
+   $userid = query($sql);
    return $userid;
 }
 
@@ -198,7 +226,7 @@ function getCurrentBid($listingId) {
 	if(empty($result))
 		return 0;
 	else
-		return result;
+		return $result;
 }
 function getTotalBids($listingId) {
 

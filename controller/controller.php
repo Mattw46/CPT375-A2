@@ -10,6 +10,12 @@ echo "Controller<br />";
 if (isset($_POST)) {
 		$sender = strrchr($_SERVER['HTTP_REFERER'], '/');
 		//echo $sender."<br />";
+		if(preg_match("/\/job.php/",$sender))
+		{
+			$isJobphp = true;
+		}
+		else 
+			$isJobphp = false;
 
     if ($sender == "/login.php") {
 			//echo "will now authenticate <br />";
@@ -68,32 +74,43 @@ if (isset($_POST)) {
     		{
     			
     			header("location: ../register.php");
-    		}
-
-			
+    		}	
 		}
+
+
 		else if ($sender == "/addjob.php") {
-		   $jobDetails = array(
-		      "userID" => get_userID($_SESSION["username"]),
-		      "start" => date('Y-m-d G:i:s'),
-		      "auctionLength" => 7,
-		      "auctionType" => 1,
-		      "summary" => $_POST["summary"],
-		      "description" => $_POST["description"],
-                      "jobtype" => $_POST["jobtype"],
-		      "joblength" => 3, //$_POST["joblength"],
-		      "startbid" => $_POST["startbid"]
-		      );
-		   $result = add_auction($jobDetails);
-		   if($result){
-		   	   $_SESSION["posted_ok_details"] = $jobDetails;
-		       header("location: ../job_posted_ok.php");       
-		   }else{
-		       header("location: ../add_job_error.php");  
+			   $jobDetails = array(
+			      "userID" => get_userID($_SESSION["username"]),
+			      "start" => date('Y-m-d G:i:s'),
+			      "auctionLength" => 7,
+			      "auctionType" => 1,
+			      "summary" => $_POST["summary"],
+			      "description" => $_POST["description"],
+	                      "jobtype" => $_POST["jobtype"],
+			      "joblength" => 3, //$_POST["joblength"],
+			      "startbid" => $_POST["startbid"]
+			      );
+			   $result = add_auction($jobDetails);
+			   if($result){
+			   	   $_SESSION["posted_ok_details"] = $jobDetails;
+			       header("location: ../job_posted_ok.php");       
+			   }else{
+			       header("location: ../add_job_error.php");  
+			   }	      
 		   }
-		   
-		      
-		   }
+		else if ($isJobphp) {
+			$bidDetails = array(
+				"bid_user_id" => $_POST["user_id"], 
+				"listing_id" => $_POST["listing_id"], 
+				"bid_amnt" => $_POST["jobProposedBidSpinner"]
+				);
+			$result = bid($bidDetails);
+			if($result)
+			{
+				//need to define a returning page
+			}
+
+		}
 		   
 		}
 		else {

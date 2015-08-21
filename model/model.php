@@ -103,6 +103,16 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 function getJobDetails($jobId) {
 	/*returns array containing the job's: shortDescription, longDescription, posterPostCode, currentBid, 
 	 * endsInTimeString, totalBids, posterUsername, posterId*/
+	 
+	$sql = "SELECT shrt_descn AS shortDescription, lng_descn AS longDescription,
+			 max(bid_amnt) AS currentBid, user.postcode AS posterPostCode,list_end_tmstmp AS endsInTimeString, 
+			 sum(bid_id) AS totalBids, username AS posterUsername, user_id AS posterId
+			FROM user LEFT JOIN listing ON list_user_id=user_id 
+			RIGHT JOIN bids 
+			ON listing.listing_id=bids.listing_id 
+			WHERE listing.listing_id='".$jobId."';";
+			
+	return query($sql);
 }
 
 function get_trades(){

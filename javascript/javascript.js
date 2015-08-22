@@ -53,7 +53,7 @@ $(function () {
         step: 1,
         slide: function (event, ui) {
             $('#addJobDurationDisplayAmount').text(ui.value);
-            $('#joblength').text(ui.value);
+            $('#joblength').val(ui.value);
         }
     });
 

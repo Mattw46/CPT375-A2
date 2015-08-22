@@ -40,7 +40,7 @@
                         days</label>
 
                     <div id="addJobDurationSpinner"></div>
-                    <input type="hidden" name="joblength" value="3">
+                    <input type="hidden" id="joblength" name="joblength" value="3">
                 </div>
                 <div class="col-xs-12" id="addJobButton">
                     <button>Place Job</button>

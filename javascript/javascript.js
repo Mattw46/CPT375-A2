@@ -1,5 +1,7 @@
 $(function () {
-
+    $.validator.addMethod("regex", function (value, element, regexpr) {
+        return regexpr.test(value);
+    });
     // SEARCH RESULTS
     // Rating Slider
     $("#ratingAmountSlider").slider({
@@ -61,5 +63,108 @@ $(function () {
         step: 5.00
     });
 
+    //registration validation
+    $("#registerForm").validate({
+        rules: {
+            username: {
+                required: true,
+                minlength: 3,
+                maxlength: 16,
+                regex: /^[a-zA-Z0-9_-]{3,16}$/
+            },
+            firstName: {
+                required: true,
+                minlength: 3,
+                regex: /^[A-Za-z-]{3,}$/
+            },
+            lastName: {
+                required: true,
+                minlength: 3,
+                regex: /^[A-Za-z-]{3,}$/
+            },
+            address1: {
+                required: true,
+                minlength: 9,
+                regex: /^[A-Za-z0-9 -]{9,}$/
+            },
+            address2: {
+                required: true,
+                minlength: 9,
+                regex: /^[A-Za-z0-9 -]{9,}$/
+            },
+            suburb: {
 
+            },
+            postCode: {
+                required: true,
+                regex: /^[1-9]{1}[0-9]{3}$/
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            confirmEmail: {
+                equalTo: '#email'
+            },
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 18,
+                regex: /^[a-zA-Z0-9_-]{6,18}$/
+            },
+            confirmPassword: {
+                equalTo: '#password'
+            }
+        },
+        messages: {
+            username: {
+                required: "Please enter your desired username.",
+                minlength: "Your username must be at least 3 characters long.",
+                maxlength: "Your username can only be up to 16 characters long.",
+                regex: "Your username must only contain letters, numbers,'-' and '_'."
+            },
+            firstName: {
+                required: "Please enter your first name.",
+                minlength: "First name must be at least 3 characters long.",
+                regex: "First name must only contain letters and '-'"
+            },
+            lastName: {
+                required: "Please enter your last name.",
+                minlength: "Last name must be at least 3 characters long.",
+                regex: "Last name must only contain letters and '-'"
+            },
+            address1: {
+                required: "Please enter your address.",
+                minlength: "Your address must be at least 9 characters long.",
+                regex: "Your address can only contain letters, numbers, spaces and '-'."
+            },
+            address2: {
+                minlength: "Your address must be at least 9 characters long.",
+                regex: "Your address can only contain letters, numbers, spaces and '-'."
+            },
+            suburb: {
+
+            },
+            postCode: {
+                regex: "Please enter your postcode."
+            },
+            email: {
+                required: "Please enter your email address.",
+                email: "Please enter your valid email address."
+            },
+            confirmEmail: {
+                equalTo: "Your email must match."
+            },
+            password: {
+                required: "Please enter your desired password.",
+                minlength: "Your password must contain at least 6 characters.",
+                maxlength: "Your password must contain 18 or less characters.",
+                regex: "Your password must only contain letters, numbers,'-' and '_', and have a length of 6 to 18 characters."
+            },
+            confirmPassword: {
+                equalTo: "Must match other password provided."
+            }
+
+        }
+    });
 });

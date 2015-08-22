@@ -19,8 +19,8 @@
                     <th>Username</th>
                     <th>Bids</th>
                     <th>Current Winning Bid</th>
-                    <th>Suspend</th>
-                    <th>Allow</th>
+                    <th>Visable</th>
+                    <th>Suspend / Allow</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,13 +29,26 @@
                    $listings = getAdminListings();
                    foreach($listings as $row){
                       $count++;
+                      if($row[5])
+                        $visible = 'Y';
+                      else
+                        $visible = 'N';
                       echo '<tr id="username' . $count . '">';
                       echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[1] . '</a></td>';
                       echo '<td><a href="./userdetails.php?user=' . $row[2] . '">' . $row[2] . '</a></td>';
                       echo '<td>' . $row[3] . '</td>';
                       echo '<td>$' . $row[4] . '</td>';
-                      echo '<td class="suspend">Suspend</td>';
-                      echo '<td class="allow">Allow</td>';
+                      echo '<td>' . $visible . '</td>';
+                      if($row[5]){
+                         echo '<td class="suspend"><a href="./php/admin/admin-controller.php?listing_id=' . $row[0];
+                         echo '&action=suspend" onclick="return confirm(\'Are you sure you want to suspend this listing?\');">';
+                         echo 'Suspend</a></td>';
+                      }
+                      else{ 
+                         echo '<td class="allow"><a href="./php/admin/admin-controller.php?listing_id=' . $row[0];
+                         echo '&action=allow" onclick="return confirm(\'Are you sure you want to allow this listing?\');">';
+                         echo 'Allow</a></td>';
+                      }
                    }
                 ?>
                 </tbody>
@@ -69,7 +82,9 @@
                       echo '<td>' . $row[3] . '</td>';
                       echo '<td>' . $row[4] . '</td>'; 
                       echo '<td>' . $row[5] . '</td>'; 
-                      echo '<td class="suspend">Delete</td>';
+                      echo '<td class="suspend"><a href="./php/admin/admin-controller.php?userid=' . $row[0];
+                      echo '&action=delete" onclick="return confirm(\'Are you sure you want to permanently delete ';
+                      echo $row[2] .'?\');">Delete</a></td>';
                    }
                 ?>
                 </tbody>

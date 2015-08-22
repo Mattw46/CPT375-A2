@@ -348,7 +348,7 @@ function getHighBid($listingId){
 }
 /* get all auctions for admin */
 function getAdminListings(){
-   $sql  = "SELECT l.listing_id, l.shrt_descn, u.username, coalesce(cnt, 0) AS cnt, coalesce(bd.mnbid, l.strt_bid) AS crnt ";
+   $sql  = "SELECT l.listing_id, l.shrt_descn, u.username, coalesce(cnt, 0) AS cnt, coalesce(bd.mnbid, l.strt_bid) AS crnt, l.visible ";
    $sql .= "FROM listing l INNER JOIN user AS u ON l.list_user_id = u.user_id ";
    $sql .= "LEFT JOIN (SELECT listing_id, COUNT(*) cnt, MIN(bid_amnt) mnbid FROM bids GROUP by listing_id) bd ";
    $sql .= "ON l.listing_id = bd.listing_id ";
@@ -451,6 +451,13 @@ function prevent_duplicate_username($details) {
 	return true;
 }
 
+function addUserProfession($username, $profnumber){
+   $userID = get_userID($username);
+   $query  = "INSERT INTO trade_typ_lnk (user_id, trade_typ_cd) ";
+   $query .= "VALUES ('" . $userID . "','" . $profnumber . "')";
+   insert($query);
+}
+
 function add_auction($details) {
    $auctionSQL  = "INSERT INTO listing ";
    $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
@@ -470,20 +477,31 @@ function add_auction($details) {
    }
 }
 
-function activate_auction() {
-	update();
+function activate_auction($listingId) {
+   $sql = "UPDATE listing SET visible = 1 WHERE listing_id = " . $listingId;
+   update($sql);
 }
 
-function deactivate_auction() {
-	update();
+function deactivate_auction($listingId) {
+   $sql = "UPDATE listing SET visible = 0 WHERE listing_id = " . $listingId;
+   update($sql);
 }
 
 function remove_auction() {
 	delete();
 }
 
-function remove_user() {
-	delete();
+/*  Admin only function to delete user*/
+function remove_user($userID) {
+   $bidsRemove = "DELETE FROM bids WHERE bid_id = " . $userID;
+   $tradesRemove = "DELETE FROM trade_typ_lnk WHERE user_id = " . $userID;
+   $pwordRemove = "DELETE FROM pword WHERE user_id = " . $userID;
+   $userRemove = "DELETE FROM user WHERE user_id = " . $userID;
+   
+   $delete = delete($bidsRemove);
+   $delete = delete($tradesRemove);
+   $delete = delete($pwordRemove);
+   $delete = delete($userRemove);	
 }
 
 function update_password($userID, $newPassword) {

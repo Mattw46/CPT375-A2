@@ -340,7 +340,7 @@ function getHighBid($listingId){
 }
 /* get all auctions for admin */
 function getAdminListings(){
-   $sql  = "SELECT l.listing_id, l.shrt_descn, u.username, coalesce(cnt, 0) AS cnt, coalesce(bd.mnbid, l.strt_bid) AS crnt ";
+   $sql  = "SELECT l.listing_id, l.shrt_descn, u.username, coalesce(cnt, 0) AS cnt, coalesce(bd.mnbid, l.strt_bid) AS crnt, l.visible ";
    $sql .= "FROM listing l INNER JOIN user AS u ON l.list_user_id = u.user_id ";
    $sql .= "LEFT JOIN (SELECT listing_id, COUNT(*) cnt, MIN(bid_amnt) mnbid FROM bids GROUP by listing_id) bd ";
    $sql .= "ON l.listing_id = bd.listing_id ";
@@ -469,12 +469,14 @@ function add_auction($details) {
    }
 }
 
-function activate_auction() {
-	update();
+function activate_auction($listingId) {
+   $sql = "UPDATE listing SET visible = 1 WHERE listing_id = " . $listingId;
+   update($sql);
 }
 
-function deactivate_auction() {
-	update();
+function deactivate_auction($listingId) {
+   $sql = "UPDATE listing SET visible = 0 WHERE listing_id = " . $listingId;
+   update($sql);
 }
 
 function remove_auction() {

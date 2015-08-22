@@ -91,8 +91,9 @@ function get_bids() {
 
 function bid($details) {
 
-	if ($details['bid_amnt'] >= getCurrentBid($details['listing_id']))
+	if ($details['bid_amnt'] <= getCurrentBid($details['listing_id']))
 	{
+		$_SESSION["Bid_amount_error"] = "Need to bid less the the previous bid! Please bid again.";
 		return false;
 	}
 	$bidSQL  = "INSERT INTO bids ";

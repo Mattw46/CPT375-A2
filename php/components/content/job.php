@@ -25,6 +25,8 @@
 
             <p id="jobCurrentBid">Current Bid: $<span id="jobCurrentBidAmount"><?php echo $currentBid; ?></span></p>
 
+             <p id="jobCurrentBid">Please place a bid less than current bid to win job</p>
+
             <form action="./controller/controller.php" method="POST">
                 <label for="jobProposedBidSpinner">Bid: $</label>
                 <input id="jobProposedBidSpinner" name="jobProposedBidSpinner" value="<?php echo ($currentBid + 1);?>">

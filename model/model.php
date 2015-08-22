@@ -481,8 +481,17 @@ function remove_auction() {
 	delete();
 }
 
-function remove_user() {
-	delete();
+/*  Admin only function to delete user*/
+function remove_user($userID) {
+   $bidsRemove = "DELETE FROM bids WHERE bid_id = " . $userID;
+   $tradesRemove = "DELETE FROM trade_typ_lnk WHERE user_id = " . $userID;
+   $pwordRemove = "DELETE FROM pword WHERE user_id = " . $userID;
+   $userRemove = "DELETE FROM user WHERE user_id = " . $userID;
+   
+   $delete = delete($bidsRemove);
+   $delete = delete($tradesRemove);
+   $delete = delete($pwordRemove);
+   $delete = delete($userRemove);	
 }
 
 function update_password($userID, $newPassword) {

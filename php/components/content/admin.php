@@ -69,7 +69,8 @@
                       echo '<td>' . $row[3] . '</td>';
                       echo '<td>' . $row[4] . '</td>'; 
                       echo '<td>' . $row[5] . '</td>'; 
-                      echo '<td class="suspend">Delete</td>';
+                      echo '<td class="suspend"><a href="./php/admin/admin-delete-user.php?userid=' . $row[0];
+                      echo '" onclick="return confirm(\'Are you sure you want to permanently delete ' . $row[2] .'?\');">Delete</a></td>';
                    }
                 ?>
                 </tbody>

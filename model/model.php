@@ -113,7 +113,75 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 	// returns an arrau of jobs jobID, shortDescription, currentBid, endsInTime, totalBids
 	// all parameters should be allowed to be omitted.
 	//defaults: numOfResults=12, sortBy=ending soonest
+	$numOfResults = 12;
+	$firstCondition = true; 
 	
+	$sql_temp = "SELECT listing.listing_id AS jobID, shrt_descn AS shortDescription, list_end_tmstmp AS endsInTime, 
+				count(bids.listing_id) AS totalBids, max(bid_amnt) AS currentBid 
+				FROM bids RIGHT JOIN listing ON bids.listing_id=listing.listing_id";
+	
+	if (isset($state)) {
+		if ($firstCondition) {
+			$sql_temp = $sql_temp."WHERE state='".$state."' ";
+			$firstCondition = false;
+		}
+		else {
+			$sql_temp = $sql_temp."AND state='".$state."' ";
+		}
+	}
+	if (isset($category)) {
+		if ($firstCondition) {
+			
+		}
+		else {
+			
+		}
+	}
+	if (isset($minRating)) {
+		if ($firstCondition) {
+				
+		}
+		else {
+				
+		}
+	}
+	if (isset($minBid)) {
+		if ($firstCondition) {
+				
+		}
+		else {
+				
+		}
+	}
+	if (isset($maxBid)) {
+		if ($firstCondition) {
+				
+		}
+		else {
+				
+		}
+	}
+	
+	if (isset($sortBy)) {
+		
+	}
+	
+	// $results = query($sql);
+	
+	// extra enteries $numOfResults for page $pageNumber
+	if (isset($pageNumber)) {
+		// get entries starting from $pageNumber * $numOfResults
+	}
+	else {
+		// get the first $numOfResults entries
+	}
+	
+	//return $results
+	
+	/*
+	 * the following is the default query if no values passed
+	 * 
+	 */
 	$sql = "SELECT listing.listing_id AS jobID, shrt_descn AS shortDescription, list_end_tmstmp AS endsInTime, 
 			count(bids.listing_id) AS totalBids, max(bid_amnt) AS currentBid 
 			FROM bids RIGHT JOIN listing ON bids.listing_id=listing.listing_id

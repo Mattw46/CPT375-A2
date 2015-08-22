@@ -282,7 +282,7 @@ function getCurrentBid($listingId) {
 }
 function getTotalBids($listingId) {
 
-	$bidQry = "SELECT SUM(bids.bid_id) 
+	$bidQry = "SELECT COUNT(bids.bid_id) 
 				FROM bids
 				where bids.listing_id ='" .$listingId. "';";
 	$result = query($bidQry);

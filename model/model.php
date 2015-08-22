@@ -1,8 +1,7 @@
 <?php
 /* Model controls all interactions with the database */
-require_once 'db_connect.php'; // databse connector goes here
-/* Defining operation functions 
- * Used to perform functions of the web app*/
+
+require_once 'db_connect.php'; 
 require_once 'validate.php';
 
 define("INVALID_USER", 0);
@@ -88,11 +87,13 @@ function is_professional($user_id)
     return false;
 }
 
+// returns a list of bids
 function get_bids()
 {
     query();
 }
 
+// Inserts bids into the database
 function bid($details)
 {
 
@@ -108,6 +109,7 @@ function bid($details)
     return true;
 }
 
+// returns a list of jobs
 function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy)
 {
     $startResult = ($pageNumber - 1) * $numOfResults;
@@ -154,6 +156,7 @@ function getLatestJobListing($numJobs)
         return 0;
 }
 
+// return list of jobs from category given
 function getJobListingByCategory($categoryId)
 {
 
@@ -204,6 +207,7 @@ function get_userID($username)
     return $userid;
 }
 
+// Get username for a given id
 function get_userName($userId)
 {
     $sql = "SELECT username FROM user WHERE user_id = '" . $userId . "'";
@@ -343,7 +347,7 @@ function getAdminUsers()
         return 0;
 }
 
-
+// return a list of bids for given lising id
 function getCurrentBid($listingId)
 {
     $bidQry = "SELECT bids.bid_amnt AS bid
@@ -357,6 +361,7 @@ function getCurrentBid($listingId)
         return $result;
 }
 
+// returns total bids
 function getTotalBids($listingId)
 {
 
@@ -414,7 +419,7 @@ function register($details)
 
 }
 
-
+// adds an auction to the database
 function add_auction($details) {
 
 	$addAddr = "INSERT INTO list_addr ";
@@ -495,18 +500,21 @@ function add_auction($details)
 >>>>>>> 9ea252b4a23bd0925b11bc0143430652664833f3
 }
 
+// set an auction to active
 function activate_auction($listingId)
 {
     $sql = "UPDATE listing SET visible = 1 WHERE listing_id = " . $listingId;
     update($sql);
 }
 
+// set an auction to inactive
 function deactivate_auction($listingId)
 {
     $sql = "UPDATE listing SET visible = 0 WHERE listing_id = " . $listingId;
     update($sql);
 }
 
+// Admin function
 function remove_auction()
 {
     delete();

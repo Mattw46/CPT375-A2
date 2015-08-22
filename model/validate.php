@@ -35,9 +35,8 @@ function valid_password($password) {
 		return true;
 	}
 	else {
-		$_SESSION["reg_array_of_errs"] = $_SESSION["reg_array_of_errs"] . $_SESSION["reg_num_of_errs"] + 1 .") Invalid password - allowed letter A-Z or a-z, numbers 1 -9 and greater the 6 and less than 18 letters total </br>";
-		$_SESSION["reg_num_of_errs"] = $_SESSION["reg_num_of_errs"] + 1;
-		return false;
+	$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .") Invalid password - allowed letter A-Z or a-z, numbers 1 -9 and greater the 6 and less than 18 letters total </br>";
+	return false;
 	}
 }
 
@@ -57,8 +56,34 @@ function validate_registration($details) {
 }
 
 // Checks values for a new auction and returns true if validated
-function validate_auction() {
-	
+function validate_auction($job) {
+	$valid = true;
+	if(0 >= strlen($job['summary'])) {
+		$valid = false;
+		$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .
+			") Invalid job summary - must be 1 or more characters. </br>";
+	}
+	if(0 >= strlen($job['description'])) {
+		$valid = false;
+		$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .
+			") Invalid description - must be 1 or more characters. </br>";
+	}
+	if(1 > $job['jobtype'] || 55 < $job['jobtype']) {
+		$valid = false;
+		$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .
+			") Invalid jobtype - must be 1 to 55 character(s). </br>";
+	}
+	if(0 <= $job['startbid']) {
+		$valid = false;
+		$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .
+			") Invalid startbid - must be 1 or more. </br>";
+	}
+	if(1 > $job['joblength'] || 7 < $job['joblength']) {
+		$valid = false;
+		$_SESSION["reg_array_of_errs"] .= ++$_SESSION["reg_num_of_errs"] .
+			") Invalid joblength - must be 1 to 7. </br>";
+	}
+	return $valid;
 }
 
 function valid_name($name) {

@@ -42,7 +42,7 @@ $(function () {
     });
 
     $('#startBidAmountSpinner').spinner({
-        min: 0,
+        min: 1,
         step: 5.0
     });
 
@@ -92,9 +92,7 @@ $(function () {
                 minlength: 9,
                 regex: /^[A-Za-z0-9 -]{9,}$/
             },
-            suburb: {
-
-            },
+            suburb: {},
             postCode: {
                 required: true,
                 regex: /^[1-9]{1}[0-9]{3}$/
@@ -142,9 +140,7 @@ $(function () {
                 minlength: "Your address must be at least 9 characters long.",
                 regex: "Your address can only contain letters, numbers, spaces and '-'."
             },
-            suburb: {
-
-            },
+            suburb: {},
             postCode: {
                 regex: "Please enter your postcode."
             },
@@ -165,6 +161,36 @@ $(function () {
                 equalTo: "Must match other password provided."
             }
 
+        }
+    });
+
+    //add job validation
+    $("#addJobForm").validate({
+        rules: {
+            summary: {
+                required: true
+            },
+            description: {
+                required: true
+            },
+            startbid: {
+                required: true,
+                min: 1
+            }
+
+
+        },
+        messages: {
+            summary: {
+                required: "Summary required."
+            },
+            description: {
+                required: "Description required."
+            },
+            startbid: {
+                required: "Must have starting bid.",
+                min: "Starting bid must be at least $1."
+            }
         }
     });
 });

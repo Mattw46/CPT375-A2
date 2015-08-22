@@ -358,6 +358,11 @@ function getAdminListings(){
    else 
       return 0;
 }
+function getUserDetails($userId){
+	$userQuery = "SELECT * from user
+				  WHERE user.user_id = '". $userId."'";
+	return query($userQuery);
+}
 
 /* get user details for admin */
 function getAdminUsers(){
@@ -459,22 +464,39 @@ function addUserProfession($username, $profnumber){
 }
 
 function add_auction($details) {
-   $auctionSQL  = "INSERT INTO listing ";
-   $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
-   $auctionSQL .= ", list_typ_cd, list_addr_id, shrt_descn, lng_descn";
-   $auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
-   $auctionSQL .= "VALUES (" . $details['userID'] . ",'" . $details['start'];
-   $auctionSQL .= "', DATE_ADD('" . $details['start'] . "', INTERVAL ";
-   $auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
-   $auctionSQL .= ", NULL, '" . $details['summary'] . "','" . $details['description'];
-   $auctionSQL .= "'," . $details['joblength'] . "," . $details['startbid'];
-   $auctionSQL .= ", NULL, TRUE)";
-	
-   if(insert($auctionSQL)){
-         return true;
-   }else{
-      return false;
-   }
+
+	$addAddr = "INSERT INTO list_addr ";
+	$addAddr .= "(address1, address2, city, state, postcode)";
+	$addAddr .= "VALUES ('" . $details['address1'] . "','" . $details['address2'];
+	$addAddr .= "','" . $details['city'] . "','" . $details['state'];
+	$addAddr .= "','" . $details['postcode'] ."');";
+	if(!insert($addAddr))
+		return false;
+
+	$maxAddrId = getMaxId("list_addr","list_addr_id");
+	echo $maxAddrId[0][0];
+
+
+	$auctionSQL  = "INSERT INTO listing ";
+	$auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
+	$auctionSQL .= ", list_typ_cd, list_addr_id, shrt_descn, lng_descn";
+	$auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
+	$auctionSQL .= "VALUES (" . $details['userID'] . ",'" . $details['start'];
+	$auctionSQL .= "', DATE_ADD('" . $details['start'] . "', INTERVAL ";
+	$auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
+	$auctionSQL .= ",". $maxAddrId[0][0] .", '" . $details['summary'] . "','" . $details['description'];
+	$auctionSQL .= "'," . $details['joblength'] . "," . $details['startbid'];
+	$auctionSQL .= ", NULL, TRUE)";
+
+	if(!insert($auctionSQL))
+		return false;
+
+	return true;
+}
+
+function getMaxId($table, $idname){
+	$maxQuery = "SELECT MAX($idname) from ($table);";
+	return query($maxQuery);
 }
 
 function activate_auction($listingId) {

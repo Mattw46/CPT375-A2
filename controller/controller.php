@@ -50,7 +50,6 @@ if (isset($_POST)) {
 
             //set a timestamp for signup_tmstmp field and pword salting
 			$timestamp = date('Y-m-d G:i:s');
-			// temporary values for testing
 			$details = array(
 				"username" => trim($_POST["username"]),
 				"first" => trim($_POST["firstName"]),
@@ -80,22 +79,28 @@ if (isset($_POST)) {
                 }
     	    }else
     		{
-    			
     			header("location: ../register.php");
     		}	
 		}   
-
-
 		else if ($sender == "/addjob.php") {
-			   $jobDetails = array(
-			      "userID" => get_userID($_SESSION["username"]),
+			  
+			  $userId = get_userID($_SESSION["username"]);
+			  $userDetails = getUserDetails($userId);
+
+			  $jobDetails = array(
+			      "userID" => $userId,
 			      "start" => date('Y-m-d G:i:s'),
 			      "auctionLength" => 7,
 			      "auctionType" => $_POST["jobtype"],
 			      "summary" => $_POST["summary"],
 			      "description" => $_POST["description"],
 			      "joblength" => $_POST["joblength"],
-			      "startbid" => $_POST["startbid"]
+			      "startbid" => $_POST["startbid"],
+			      "address1" => $userDetails [0]["address1"],
+			      "address2" => $userDetails [0]["address2"],
+			      "city" => $userDetails [0]["city"],
+			      "state" => $userDetails [0]["state"],
+			      "postcode" => $userDetails [0]["postcode"]
 			      );
 			   $result = add_auction($jobDetails);
 			   if($result){

@@ -50,7 +50,7 @@
                                 $totalbid= $totalB[0][0];
                             echo $totalbid;
                             ?>
-                            <form method="GET" action="/job.php">
+                            <form method="GET" action="./job.php">
                                 <input type ="hidden" name = "listing_id" value = <?php echo $db_array['listing_id']; ?> />
                                 <button type ="submot">Place bid</button>
                             </form>

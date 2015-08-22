@@ -7,6 +7,7 @@ if(isset($_SESSION['authenticated'])) {
 } else {
     $userHeader1 = "./login.php'>Log in";
     $userHeader2 = "./register.php'>Sign up";
+    $admin = 0; 
 }
 
 ?>

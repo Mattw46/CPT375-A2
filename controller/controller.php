@@ -87,7 +87,7 @@ if (isset($_POST)) {
 			      "summary" => $_POST["summary"],
 			      "description" => $_POST["description"],
 	                      "jobtype" => $_POST["jobtype"],
-			      "joblength" => 3, //$_POST["joblength"],
+			      "joblength" => $_POST["joblength"],
 			      "startbid" => $_POST["startbid"]
 			      );
 			   $result = add_auction($jobDetails);

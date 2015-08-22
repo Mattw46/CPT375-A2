@@ -1,8 +1,9 @@
 <?php
-
+require_once './model/model.php';
 if(isset($_SESSION['authenticated'])) {
     $userHeader1 = "./userdetails.php?user=" . $_SESSION['username'] ."'>" . $_SESSION['username'];
     $userHeader2 = "./logout.php'>Log Out";
+    $admin = is_admin(get_userID($_SESSION['username'])); 
 } else {
     $userHeader1 = "./login.php'>Log in";
     $userHeader2 = "./register.php'>Sign up";
@@ -39,4 +40,8 @@ if(isset($_SESSION['authenticated'])) {
         <div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">
             <p><a href='<?php echo $userHeader2 ?></a></p>
         </div>
+    
+    </div>
+    <div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">
+            <?php echo '<a href="./admin.php"><button>Admin</button></a>'; ?>
     </div>

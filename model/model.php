@@ -238,9 +238,39 @@ function getUserListings($userID){
       else
          return 0;
 }
+/*  Get the listings that a user has bid on */
+function getUserBidListings($userID){
+   $sql  = "SELECT b.listing_id, l.shrt_descn, u.username,MIN(bid_amnt) AS mymaxbid, mx.maxbid ";
+   $sql .= "FROM bids AS b INNER JOIN listing AS l ON b.listing_id = l.listing_id ";
+   $sql .= "INNER JOIN user AS u ON l.list_user_id = u.user_id ";
+   $sql .= "INNER JOIN (SELECT listing_id, MIN(bid_amnt) AS maxbid FROM bids GROUP BY 1) mx ";
+   $sql .= "ON b.listing_id = mx.listing_id WHERE bid_user_id = '". $userID."' ";
+   $sql .= "GROUP BY b.listing_id,l.shrt_descn,u.username,mx.maxbid";
+   $result = query($sql);
+      if($result)
+         return $result;
+      else
+         return 0;
+}
+
+/* Get highest bid and bidder */
+function getHighBid($listingId){
+   $sql  = "SELECT b.listing_id, u.username, mn.minbid FROM bids AS b INNER JOIN ( ";
+   $sql .= "SELECT listing_id, MIN(bid_amnt) AS minbid from bids GROUP BY listing_id) AS mn ";
+   $sql .= "ON b.listing_id = mn.listing_id AND mn.minbid = b.bid_amnt";
+   $sql .= "INNER JOIN user AS u ON b.bid_user_id = u.user_id";
+   $sql .= "INNER JOIN listing l ON l.listing_id = b.listing_id";
+   $sql .= "WHERE b.listing_id = '". $listingId."'";
+   $result = query_single($sql);
+   if($result)
+      return $result;
+   else 
+      return 0;
+}
+
 
 function getCurrentBid($listingId) {
-	$bidQry = "SELECT bids.bid_amnt AS bid 
+	$bidQry = "SELECT bids.bid_amnt AS bid
 				FROM bids
 				where bids.listing_id ='" .$listingId."'
 				ORDER BY bid_id DESC;";

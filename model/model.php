@@ -443,6 +443,13 @@ function prevent_duplicate_username($details) {
 	return true;
 }
 
+function addUserProfession($username, $profnumber){
+   $userID = get_userID($username);
+   $query  = "INSERT INTO trade_typ_lnk (user_id, trade_typ_cd) ";
+   $query .= "VALUES ('" . $userID . "','" . $profnumber . "')";
+   insert($query);
+}
+
 function add_auction($details) {
    $auctionSQL  = "INSERT INTO listing ";
    $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";

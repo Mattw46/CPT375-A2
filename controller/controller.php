@@ -62,19 +62,28 @@ if (isset($_POST)) {
 				"postcode" => trim($_POST["postCode"]),
 				"email" => trim($_POST["email"]),
 				"signup_tmstmp" => $timestamp,
-				"user_typ_cd" => "1",
+				"user_typ_cd" => trim($_POST["userType"]),
 				"pword" => md5(trim($_POST["password"]) . $timestamp)
 			);
 
             $result = register($details);
             if($result){
-            	header("location: ../login.php");
-    		}else
+                if($_POST["userType"] == 10)
+            	   header("location: ../login.php");
+                else {
+                   for($i=0;$i<=key(array_slice( $_POST["profession"], -1, 1, TRUE));$i++) {
+                      if(isset($_POST["profession"][$i]) && $_POST["profession"][$i] == 1){
+                         addUserProfession($_POST["username"], $i);
+                      }
+                   //header("location: ../login.php");
+                   }
+                }
+    	    }else
     		{
     			
     			header("location: ../register.php");
     		}	
-		}
+		}   
 
 
 		else if ($sender == "/addjob.php") {

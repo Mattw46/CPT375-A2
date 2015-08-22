@@ -1,4 +1,8 @@
-<?php require_once './model/model.php'; ?>
+<?php
+require_once './model/model.php';
+$jobResults = getLatestJobListing(20);
+?>
+</form>
 <div class="row content" id="main">
     <div class="col-sm-3 leftMenu" id="categories">
         <h3>Categories</h3>
@@ -18,7 +22,7 @@
     <?php 
     //update to place dropdown box for how many items to display
     $latestJobs = getLatestJobListing(20);
-    foreach($latestJobs as $count => $db_array){ 
+    foreach($latestJobs as $count => $db_array){
         if($db_array['visible']) {?>
                 <div class="col-xs-6 center-xs col-sm-4 col-lg-3 listing">
                     <div class="inner">

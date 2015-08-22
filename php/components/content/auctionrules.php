@@ -8,14 +8,9 @@
     </div>
     <div class="col-xs-12 center-xs" id="rules">
         <ul>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
-            <li>This is a <strong>rule</strong>.</li>
+            <li>Noone can bid less than a dollar, everyone deserves to make something.</li>
+            <li>Noone can get paid more than $9,999 for a job, we don't like people making more than our annual income for a single activity.</li>
+            <li>How we get paid is on the honour system, please send $1 to Happy Dude, 742 Evergreen Terrace, Springfield. Don't delay; eternal happiness is just $1 away!</li>
         </ul>
     </div>
 </div>

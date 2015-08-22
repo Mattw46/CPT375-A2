@@ -113,6 +113,13 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 	// returns an arrau of jobs jobID, shortDescription, currentBid, endsInTime, totalBids
 	// all parameters should be allowed to be omitted.
 	//defaults: numOfResults=12, sortBy=ending soonest
+	
+	$sql = "SELECT listing.listing_id AS jobID, shrt_descn AS shortDescription, list_end_tmstmp AS endsInTime, 
+			count(bids.listing_id) AS totalBids, max(bid_amnt) AS currentBid 
+			FROM bids RIGHT JOIN listing ON bids.listing_id=listing.listing_id
+			GROUP BY bids.listing_id;";
+	
+	return query($sql);
 }
 function getLatestJobListing($numJobs){
 	$lstid = "SELECT MAX(listing_id) FROM listing";

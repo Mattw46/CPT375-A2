@@ -217,6 +217,28 @@ function getBids($userID){
       return 0;
    }
 }
+
+/* Get a professional's trades */
+function getProTrades($userID){
+   $sql =  "SELECT typ.trade_typ FROM trade_typ_lnk AS lnk INNER JOIN trade_typ AS typ ";
+   $sql .= "ON lnk.trade_typ_cd = typ.trade_typ_cd WHERE lnk.user_id ='". $userID."'";
+   $result = query($sql);
+   if($result)
+      return $result;
+   else
+      return 0;
+}
+
+/* Get the listings that a user has created */
+function getUserListings($userID){
+   $sql = "SELECT * FROM listing WHERE list_user_id = '". $userID."'";
+   $result = query($sql);
+      if($result)
+         return $result;
+      else
+         return 0;
+}
+
 function getCurrentBid($listingId) {
 	$bidQry = "SELECT bids.bid_amnt AS bid 
 				FROM bids

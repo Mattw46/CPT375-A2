@@ -75,7 +75,7 @@ if (isset($_POST)) {
                       if(isset($_POST["profession"][$i]) && $_POST["profession"][$i] == 1){
                          addUserProfession($_POST["username"], $i);
                       }
-                   //header("location: ../login.php");
+                   header("location: ../login.php");
                    }
                 }
     	    }else

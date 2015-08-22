@@ -42,6 +42,11 @@ if(isset($_SESSION['authenticated'])) {
         </div>
     
     </div>
-    <div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">
-            <?php echo '<a href="./admin.php"><button>Admin</button></a>'; ?>
-    </div>
+    <?php 
+       if($admin){
+          echo'<div class="col-xs-6 col-sm-2 end-sm log-in-sign-up">';
+          echo '<a href="./admin.php"><button>Admin</button></a>';
+          echo '</div>';
+       }
+    ?>
+    

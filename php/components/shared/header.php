@@ -19,6 +19,7 @@ if(isset($_SESSION['authenticated'])) {
     <title><?php echo($pageTitle); ?></title>
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="javascript/jquery-ui.min.js"></script>
     <script src="javascript/javascript.js"></script>
 </head>

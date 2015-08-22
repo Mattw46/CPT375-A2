@@ -17,7 +17,7 @@
             ?>
             <h2 id="jobTitle"><?php echo $listing[0]["shrt_descn"]; ?></h2>
 
-            <p id="jobPostedBy">Posted by <a href="#"><span id="jobPoster"><?php echo $username[0][0]; ?></span></a>
+            <p id="jobPostedBy">Posted by <a href="./userdetails?user=<?php echo $username[0][0]; ?>"><span id="jobPoster"><?php echo $username[0][0]; ?></span></a>
             </p>
             <img src="http://placehold.it/300x225">
 

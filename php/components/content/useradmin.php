@@ -1,6 +1,6 @@
-<?php 
-   require_once './model/model.php'; 
-   $userID = get_userID($_GET['user']);
+<?php
+require_once './model/model.php';
+$userID = get_userID($_GET['user']);
 ?>
 <div class="row content">
     <div class="col-xs-12 col-sm-3 leftMenu center-xs">
@@ -22,27 +22,27 @@
                 </thead>
                 <tbody>
                 <?php
-                   $listings = getUserListings($userID);
-                   if($listings != 0){
-                      foreach($listings as $row){
-                         $dateNow = new DateTime(date('Y-m-d G:i:s'));
-                         $dateEnd = new DateTime($row[3]);
-                         $interval = $dateNow->diff($dateEnd);
-                         $currentb = getCurrentBid($row[0]);
-                         if ($currentb == 0)
+                $listings = getUserListings($userID);
+                if ($listings != 0) {
+                    foreach ($listings as $row) {
+                        $dateNow = new DateTime(date('Y-m-d G:i:s'));
+                        $dateEnd = new DateTime($row[3]);
+                        $interval = $dateNow->diff($dateEnd);
+                        $currentb = getCurrentBid($row[0]);
+                        if ($currentb == 0)
                             $currentBid = 0;
-                         else
+                        else
                             $currentBid = $currentb[0][0];
-                         if($interval->format("%d days %H:%I:%S") > 0){
+                        if ($interval->format("%d days %H:%I:%S") > 0) {
                             echo '<tr>';
                             echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[6] . '</a></td>';
                             echo '<td>' . $interval->format("%d days %H:%I:%S") . '</td>';
                             echo '<td>$' . $currentBid . '</td>';
                             echo '</tr>';
-                         }
-                      }
-                      
-                   }
+                        }
+                    }
+
+                }
                 ?>
                 </tbody>
             </table>
@@ -60,33 +60,33 @@
                 </thead>
                 <tbody>
                 <?php
-                   $listings = getUserListings($userID);
-                   if($listings != 0){
-                      foreach($listings as $row){
-                         $dateNow = new DateTime(date('Y-m-d G:i:s'));
-                         $dateEnd = new DateTime($row[3]);
-                         $interval = $dateNow->diff($dateEnd);
-                         $maxbid = getHighBid($row[0]);
-                         if($maxbid != 0){
-                            if($interval->format("%d days %H:%I:%S") < 0){
-                               echo '<tr>';
-                               echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[6] . '</a></td>';
-                               echo '<td><a href="./userdetails?user=' . $maxbid[1] . '">' . $maxbid[1] . '</a></td>';
-                               echo '<td>$' . $maxbid[2] . '</td>';
-                               echo '</tr>';
+                $listings = getUserListings($userID);
+                if ($listings != 0) {
+                    foreach ($listings as $row) {
+                        $dateNow = new DateTime(date('Y-m-d G:i:s'));
+                        $dateEnd = new DateTime($row[3]);
+                        $interval = $dateNow->diff($dateEnd);
+                        $maxbid = getHighBid($row[0]);
+                        if ($maxbid != 0) {
+                            if ($interval->format("%d days %H:%I:%S") < 0) {
+                                echo '<tr>';
+                                echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[6] . '</a></td>';
+                                echo '<td><a href="./userdetails?user=' . $maxbid[1] . '">' . $maxbid[1] . '</a></td>';
+                                echo '<td>$' . $maxbid[2] . '</td>';
+                                echo '</tr>';
                             }
-                         }else{
-                            if($interval->format("%d days %H:%I:%S") < 0){
-                               echo '<tr>';
-                               echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[6] . '</a></td>';
-                               echo '<td>No bids</td>';
-                               echo '<td></td>';
-                               echo '</tr>';
+                        } else {
+                            if ($interval->format("%d days %H:%I:%S") < 0) {
+                                echo '<tr>';
+                                echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[6] . '</a></td>';
+                                echo '<td>No bids</td>';
+                                echo '<td></td>';
+                                echo '</tr>';
                             }
-                         }
-                      }
-                      
-                   }
+                        }
+                    }
+
+                }
                 ?>
                 </tbody>
             </table>
@@ -104,21 +104,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                   <?php
-                      $bidAuctions = getUserBidListings($userID);
-                      if($bidAuctions != 0){
-                         foreach($bidAuctions as $row){
-                            echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[1] . '</a></td>';
-                            echo '<td><a href="./userdetails?user=' . $row[2] . '">' . $row[2] . '</a></td>';
-                            echo '<td>$' . $row[3] .'</td>';
-                            echo '<td>$' . $row[4] .'</td>';
-                         }
-                      }
-                   ?>
+                <?php
+                $bidAuctions = getUserBidListings($userID);
+                if ($bidAuctions != 0) {
+                    foreach ($bidAuctions as $row) {
+                        echo '<tr>';
+                        echo '<td><a href="./job.php?listing_id=' . $row[0] . '">' . $row[1] . '</a></td>';
+                        echo '<td><a href="./userdetails.php?user=' . $row[2] . '">' . $row[2] . '</a></td>';
+                        echo '<td>$' . $row[3] . '</td>';
+                        echo '<td>$' . $row[4] . '</td>';
+                        echo '</tr>';
+                    }
+                }
+                ?>
                 </tbody>
             </table>
         </div>
 
-        
+
     </div>
 </div>

@@ -1,6 +1,4 @@
-<?php require_once './model/model.php'; 
-
-
+<?php require_once './model/model.php';
 ?>
 
 <div class="row content">
@@ -13,25 +11,24 @@
         <div class="row center-xs">
             <h2 class="col-xs-12 center-xs">Add job!</h2>
 
-            <form action="./controller/controller.php" method="post">
+            <form id="addJobForm" name="addJobForm" action="./controller/controller.php" method="post">
                 <div class="col-xs-12">
-                    <label for="addJobSummary">Job Summary:</label>
-                    <input id="addJobSummary" type="text" name="summary">
+                    <label for="summary">Job Summary:</label>
+                    <input id="summary" type="text" name="summary">
                 </div>
                 <div class="col-xs-12">
-                    <label for="addJobDescription">Job Description:</label>
-                    <textarea id="addJobDescription" rows="3" name="description"></textarea>
+                    <label for="description">Job Description:</label>
+                    <textarea id="description" rows="3" name="description"></textarea>
                 </div>
                 <div class="col-xs-12">
-                    <label for="addJobCategory">Category of work:</label>
-                    <select id="addJobCategory" name="jobtype">
-			<?php
-                           $tradesList = get_trades();
-                           foreach($tradesList as $row){
-                              echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
-                           }
-        	        ?>
-                        
+                    <label for="jobtype">Category of work:</label>
+                    <select id="jobtype" name="jobtype">
+                        <?php
+                        $tradesList = get_trades();
+                        foreach ($tradesList as $row) {
+                            echo '<option value="' . $row[0] . '">' . $row[1] . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-xs-12">
@@ -41,18 +38,14 @@
                 <div class="col-xs-12">
                     <label for="addJobDurationSpinner">Job Duration: <span id="addJobDurationDisplayAmount">3</span>
                         days</label>
-                    <div id="addJobDurationSpinner" name = "addJobDurationSpinner"></div>
-                    <input type="hidden" name="joblength" value="3">
+
+                    <div id="addJobDurationSpinner"></div>
+                    <input type="hidden" id="joblength" name="joblength" value="3">
                 </div>
                 <div class="col-xs-12" id="addJobButton">
                     <button>Place Job</button>
                 </div>
             </form>
         </div>
-
     </div>
-
-
 </div>
-
-

@@ -82,10 +82,9 @@ if (isset($_POST)) {
 			      "userID" => get_userID($_SESSION["username"]),
 			      "start" => date('Y-m-d G:i:s'),
 			      "auctionLength" => 7,
-			      "auctionType" => 1,
+			      "auctionType" => $_POST["jobtype"],
 			      "summary" => $_POST["summary"],
 			      "description" => $_POST["description"],
-	                      "jobtype" => $_POST["jobtype"],
 			      "joblength" => $_POST["joblength"],
 			      "startbid" => $_POST["startbid"]
 			      );

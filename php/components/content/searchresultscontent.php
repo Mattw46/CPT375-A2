@@ -1,6 +1,9 @@
 <?php require_once './model/model.php'; ?>
 <div class="row content" id="searchresultscontent">
     <?php 
+    if(isset($_GET['categoryId'])){
+        $categoryId = $_GET['categoryId'];
+     }
      $latestJobs = getLatestJobListing(20);
     foreach($latestJobs as $count => $db_array){ 
         if($db_array['visible']) {?>
@@ -22,7 +25,7 @@
                         $date1 = new DateTime(date('Y-m-d G:i:s'));
                         $date2 = new DateTime($db_array['list_end_tmstmp']);
                         $interval = $date1->diff($date2);
-                        echo $interval->format("%H:%I:%S"); ?></span></p>
+                        echo $interval->format("%d days %H:%I:%S"); ?></span></p>
 
                         <p class="listing-total-bids">Total Bids: <span class="listing-total-bids-amount">
                              <?php 

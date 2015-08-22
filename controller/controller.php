@@ -10,6 +10,7 @@ echo "Controller<br />";
 if (isset($_POST)) {
 		$sender = strrchr($_SERVER['HTTP_REFERER'], '/');
 		//echo $sender."<br />";
+
 		if(preg_match("/\/job.php/",$sender))
 		{
 			$isJobphp = true;
@@ -22,11 +23,9 @@ if (isset($_POST)) {
 			$username = $_POST["username"];
 			$password = $_POST["password"];
 			$id = login($username, $password);
-			echo $id;
         if ($id > 0) {
 			$_SESSION["authenticated"] = $id;
             $_SESSION["username"] = $username;
-            echo "was here";
 
 				if(isset($_SESSION['loginHttpReferer'])) {
 					header("location: ../".$_SESSION['loginHttpReferer']);
@@ -105,11 +104,13 @@ if (isset($_POST)) {
 				"bid_amnt" => $_POST["jobProposedBidSpinner"]
 				);
 			$result = bid($bidDetails);
-			if($result)
-			{
-				//need to define a returning page
-			}
 
+			 if($result){
+			 	   $_SESSION["bid_ok_details"] = $bidDetails;
+			       header("location: ../bid_posted_ok.php");       
+			   }else{
+			       header("location: ../bid_job_error.php");  
+			   }
 		}
 		   
 		}

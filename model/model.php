@@ -91,22 +91,16 @@ function get_bids() {
 
 function bid($details) {
 
-	if ($details['bid_amnt'] <= getCurrentBid($details['listing_id']))
+	if ($details['bid_amnt'] >= getCurrentBid($details['listing_id']))
 	{
 		return false;
 	}
-	echo $details['bid_user_id'];
 	$bidSQL  = "INSERT INTO bids ";
     $bidSQL .= "(bid_user_id, listing_id, bid_amnt)";
     $bidSQL .= "VALUES (" . $details['bid_user_id'] . ",'" . $details['listing_id'];
     $bidSQL .= "'," . $details['bid_amnt'] . ")";
-	echo $bidSQL;
-	$success = insert($bidSQL);
-
- 	if ($success)
- 		return true;
- 	else
- 		return false;
+	insert($bidSQL);
+	return true;
 }
 
 function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy) {

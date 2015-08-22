@@ -29,7 +29,7 @@
 
             <form action="./controller/controller.php" method="POST">
                 <label for="jobProposedBidSpinner">Bid: $</label>
-                <input id="jobProposedBidSpinner" name="jobProposedBidSpinner" value="<?php echo ($currentBid + 1);?>">
+                <input id="jobProposedBidSpinner" name="jobProposedBidSpinner" value="<?php echo ($currentBid - 1);?>">
                 <input type ="hidden" name = "listing_id" value = "<?php echo $listing[0]['listing_id']; ?>" />
                  <input type ="hidden" name = "user_id" value = "<?php echo $_SESSION["authenticated"]; ?>"/>
                 <br>

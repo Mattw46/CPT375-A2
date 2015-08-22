@@ -1,4 +1,8 @@
-<?php require_once './model/model.php'; ?>
+<?php
+require_once './model/model.php';
+$jobResults = getLatestJobListing(20);
+?>
+</form>
 <div class="row content" id="main">
     <div class="col-sm-3 leftMenu" id="categories">
         <h3>Categories</h3>

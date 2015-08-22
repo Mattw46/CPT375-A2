@@ -1,11 +1,12 @@
 <?php require_once './model/model.php'; ?>
+</form>
 <div class="row content" id="searchresultscontent">
     <?php 
     if(isset($_GET['categoryId'])){
         $categoryId = $_GET['categoryId'];
      }
-     $latestJobs = getLatestJobListing(20);
-    foreach($latestJobs as $count => $db_array){ 
+
+    foreach($jobResults as $count => $db_array){
         if($db_array['visible']) {?>
                 <div class="col-xs-6 center-xs col-sm-4 col-lg-3 listing">
                     <div class="inner">

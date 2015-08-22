@@ -1,4 +1,3 @@
-<form>
     <div class="row" id="searchresultsrefine">
         <div class="col-xs-11">
             <div class="row">
@@ -9,7 +8,6 @@
                             <div class="col-xs-12">
                                 <label for="ratingAmount">Accepts Rating of <span id="ratingDisplayAmount">0</span> or
                                     higher</label>
-
                                 <div id="ratingAmountSlider"></div>
                             </div>
                             <div class="col-xs-12">
@@ -47,4 +45,19 @@
             </div>
         </div>
     </div>
-</form>
+
+
+<?php
+//get results and put them into list for searchresultscontent.php to handle
+$term = isset($_GET['term']) ? $_GET['term'] : '';
+$state = isset($_GET['state']) ? $_GET['state'] : '';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$minRating = isset($_GET['minRating']) ? $_GET['minRating'] : '';//
+$minBid = isset($_GET['minBidAmountSpinner']) ? $_GET['minBidAmountSpinner'] : '';
+$maxBid = isset($_GET['maxBidAmountSpinner']) ? $_GET['maxBidAmountSpinner'] : '';
+$numOfResults = isset($_GET['auctionsPerPage']) ? $_GET['auctionsPerPage'] : '';
+$pageNumber = isset($_GET['pageNumber']) ? $_GET['pageNumber'] : 1;
+$sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : '';
+
+$jobResults = getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy)
+?>

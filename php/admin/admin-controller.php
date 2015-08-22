@@ -1,4 +1,5 @@
 <?php
+   /* Checks if user is authenticated and if they have admin access*/
    session_start();
    require_once '../../model/model.php';
    if(!isset($_SESSION['authenticated']))

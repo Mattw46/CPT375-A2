@@ -343,6 +343,29 @@ function getHighBid($listingId){
    else 
       return 0;
 }
+/* get all auctions for admin */
+function getAdminListings(){
+   $sql  = "SELECT l.listing_id, l.shrt_descn, u.username, coalesce(cnt, 0) AS cnt, coalesce(bd.mnbid, l.strt_bid) AS crnt ";
+   $sql .= "FROM listing l INNER JOIN user AS u ON l.list_user_id = u.user_id ";
+   $sql .= "LEFT JOIN (SELECT listing_id, COUNT(*) cnt, MIN(bid_amnt) mnbid FROM bids GROUP by listing_id) bd ";
+   $sql .= "ON l.listing_id = bd.listing_id ";
+   $result = query($sql);
+   if($result)
+      return $result;
+   else 
+      return 0;
+}
+
+/* get user details for admin */
+function getAdminUsers(){
+   $sql  = "SELECT u.user_id, username, CONCAT(first_name, ' ', last_name) AS nm, email, date_format(signup_tmstmp,'%d/%m/%y') AS dt, user_typ ";
+   $sql .= "FROM user AS u INNER JOIN user_typ AS typ ON u.user_typ_cd = typ.user_typ_cd";
+   $result = query($sql);
+   if($result)
+      return $result;
+   else 
+      return 0;
+}
 
 
 function getCurrentBid($listingId) {

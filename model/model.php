@@ -116,11 +116,11 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
                    FROM listing";
     $wheres = 0;
     if ($term != '') {
-        $arrayQuery .= ($wheres == 0) ? " WHERE" : "";
+        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
         $arrayQuery .= " shrt_descn LIKE '" . $term . "'";
     }
     if ($category != '') {
-        $arrayQuery .= ($wheres == 0) ? " WHERE" : "";
+        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
         $arrayQuery .= " list_typ_cd=" . $category;
     }
 

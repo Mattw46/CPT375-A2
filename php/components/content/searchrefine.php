@@ -49,15 +49,15 @@
 
 <?php
 //get results and put them into list for searchresultscontent.php to handle
-$term = isset($_GET['term']) ? $_GET['term'] : '';
-$state = isset($_GET['state']) ? $_GET['state'] : '';
-$category = isset($_GET['category']) ? $_GET['category'] : '';
-$minRating = isset($_GET['minRating']) ? $_GET['minRating'] : '';//
-$minBid = isset($_GET['minBidAmountSpinner']) ? $_GET['minBidAmountSpinner'] : '';
-$maxBid = isset($_GET['maxBidAmountSpinner']) ? $_GET['maxBidAmountSpinner'] : '';
-$numOfResults = isset($_GET['auctionsPerPage']) ? $_GET['auctionsPerPage'] : '';
+$term = isset($_GET['term']) ? '%'.$_GET['term'].'%' : '';
+$state = isset($_GET['state']) ? '%'.$_GET['state'].'%' : '';
+$category = isset($_GET['categoryId']) ? $_GET['categoryId'] : '';
+$minRating = isset($_GET['minRating']) ? $_GET['minRating'] : 0;//
+$minBid = isset($_GET['minBidAmountSpinner']) ? $_GET['minBidAmountSpinner'] : 0;
+$maxBid = isset($_GET['maxBidAmountSpinner']) ? $_GET['maxBidAmountSpinner'] : 9999;
+$numOfResults = isset($_GET['auctionsPerPage']) ? $_GET['auctionsPerPage'] : 12;
 $pageNumber = isset($_GET['pageNumber']) ? $_GET['pageNumber'] : 1;
 $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : '';
 
-$jobResults = getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy)
+$jobResults = getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfResults, $pageNumber, $sortBy);
 ?>

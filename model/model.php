@@ -205,6 +205,14 @@ function getLatestJobListing($numJobs){
 		return 0;
 }
 
+function getJobListingByCategory($categoryId){
+
+	$listTypeCdquery = "SELECT listing_id FROM listing
+				   WHERE list_typ_cd = '". $categoryId."'
+				   ORDER BY listing_id DESC;";	
+	return query($listTypeCdquery);	
+	}
+
 function getListingDetails($listingId){
 	$listDetail = "SELECT * from listing
 				WHERE listing_id = '".$listingId."';";

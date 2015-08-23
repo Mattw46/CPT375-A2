@@ -497,7 +497,7 @@ function add_auction($details)
     } else {
         return false;
     }
-//>>>>>>> 9ea252b4a23bd0925b11bc0143430652664833f3
+/*>>>>>>> 9ea252b4a23bd0925b11bc0143430652664833f3*/
 }
 
 // set an auction to active

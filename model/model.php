@@ -432,7 +432,6 @@ function add_auction($details) {
 		return false;
 
 	$maxAddrId = getMaxId("list_addr","list_addr_id");
-	echo $maxAddrId[0][0];
 
 
 	$auctionSQL  = "INSERT INTO listing ";
@@ -455,6 +454,12 @@ function add_auction($details) {
 function getMaxId($table, $idname){
 	$maxQuery = "SELECT MAX($idname) from ($table);";
 	return query($maxQuery);
+}
+function getListAddr($list_addr_Id)
+{
+    $listAdd = "SELECT * from list_addr
+                where list_addr_id = " .$list_addr_Id .";";
+    return query($listAdd);
 }
 
 function prevent_duplicate_username($details)

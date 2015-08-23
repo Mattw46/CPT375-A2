@@ -419,6 +419,7 @@ function register($details)
 
 }
 
+
 // adds an auction to the database
 function add_auction($details) {
 
@@ -454,7 +455,7 @@ function add_auction($details) {
 function getMaxId($table, $idname){
 	$maxQuery = "SELECT MAX($idname) from ($table);";
 	return query($maxQuery);
-	{
+}
 
 function prevent_duplicate_username($details)
 {
@@ -479,26 +480,6 @@ function addUserProfession($username, $profnumber)
     insert($query);
 }
 
-function add_auction($details)
-{
-    $auctionSQL = "INSERT INTO listing ";
-    $auctionSQL .= "(list_user_id, list_strt_tmstmp, list_end_tmstmp";
-    $auctionSQL .= ", list_typ_cd, list_addr_id, shrt_descn, lng_descn";
-    $auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
-    $auctionSQL .= "VALUES (" . $details['userID'] . ",'" . $details['start'];
-    $auctionSQL .= "', DATE_ADD('" . $details['start'] . "', INTERVAL ";
-    $auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
-    $auctionSQL .= ", NULL, '" . $details['summary'] . "','" . $details['description'];
-    $auctionSQL .= "'," . $details['joblength'] . "," . $details['startbid'];
-    $auctionSQL .= ", NULL, TRUE)";
-
-    if (insert($auctionSQL)) {
-        return true;
-    } else {
-        return false;
-    }
-/*>>>>>>> 9ea252b4a23bd0925b11bc0143430652664833f3*/
-}
 
 // set an auction to active
 function activate_auction($listingId)
@@ -534,6 +515,7 @@ function remove_user($userID)
     $delete = delete($pwordRemove);
     $delete = delete($userRemove);
 }
+
 
 function update_password($userID, $newPassword)
 {
@@ -623,5 +605,4 @@ function insert($query_string)
     }
 
 }
-
 ?>

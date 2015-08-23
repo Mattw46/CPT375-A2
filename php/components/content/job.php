@@ -26,7 +26,15 @@
             <p id="jobCurrentBid">Current Bid: $<span id="jobCurrentBidAmount"><?php echo $currentBid; ?></span></p>
 
              <p id="jobCurrentBid">Please place a bid less than current bid to win job</p>
+             <?php
+                $address = getListAddr($_GET['listing_id']);
+                if ($address) {
+                ?>
 
+                <p class="listing-title"><?php echo "Location: " . $address[0]['state']?></p>
+            <?php
+            }
+            ?>
             <form action="./controller/controller.php" method="POST">
                 <label for="jobProposedBidSpinner">Bid: $</label>
                 <input id="jobProposedBidSpinner" name="jobProposedBidSpinner" value="<?php echo ($currentBid - 1);?>">

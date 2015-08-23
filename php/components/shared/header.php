@@ -27,7 +27,7 @@ if(isset($_SESSION['authenticated'])) {
 <div class="container-fluid">
     <div class="row center-xs start-sm" id="masthead">
         <div class="col-xs-12 col-sm-5" id="logo">
-            <a href="./"><img src="http://placehold.it/200x70"></a>
+            <a href="./"><img src="./images/logo.png"></a>
         </div>
         <div class="col-xs-12 col-sm-3 end-sm" id="place-job">
             <a href="./addjob.php">

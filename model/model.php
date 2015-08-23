@@ -441,7 +441,7 @@ function add_auction($details) {
 	$auctionSQL .= ", job_len, strt_bid, photo_url, visible) ";
 	$auctionSQL .= "VALUES (" . $details['userID'] . ",'" . $details['start'];
 	$auctionSQL .= "', DATE_ADD('" . $details['start'] . "', INTERVAL ";
-	$auctionSQL .= $details['auctionLength'] . " DAY), " . $details['auctionType'];
+	$auctionSQL .= $details['joblength'] . " DAY), " . $details['auctionType'];
 	$auctionSQL .= ",". $maxAddrId[0][0] .", '" . $details['summary'] . "','" . $details['description'];
 	$auctionSQL .= "'," . $details['joblength'] . "," . $details['startbid'];
 	$auctionSQL .= ", NULL, TRUE)";

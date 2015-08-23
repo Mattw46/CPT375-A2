@@ -5,11 +5,11 @@
                     <form>
                         <div class="row">
 
-                            <div class="col-xs-12">
+                            <!--<div class="col-xs-12">
                                 <label for="ratingAmount">Accepts Rating of <span id="ratingDisplayAmount">0</span> or
                                     higher</label>
                                 <div id="ratingAmountSlider"></div>
-                            </div>
+                            </div> -->
                             <div class="col-xs-12">
                                 <label for="minBidAmountSpinner">Minimum bid:</label>
                                 <input id="minBidAmountSpinner" name="minBidAmountSpinner" value="0.00">
@@ -30,14 +30,14 @@
                                 </select>
                             </div>
 
-                            <div class="col-xs-12">
+                            <!--<div class="col-xs-12">
                                 <label for="auctionsPerPage">Auctions per page:</label>
                                 <select name="auctionsPerPage" id="auctionsPerPage">
                                     <option>12</option>
                                     <option>24</option>
                                     <option>36</option>
                                 </select>
-                            </div>
+                            </div> -->
 
                         </div>
                     </form>
@@ -51,7 +51,7 @@
 //get results and put them into list for searchresultscontent.php to handle
 $term = isset($_GET['term']) ? '%'.$_GET['term'].'%' : '';
 $state = isset($_GET['state']) ? '%'.$_GET['state'].'%' : '';
-$category = isset($_GET['categoryId']) ? $_GET['categoryId'] : '';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
 $minRating = isset($_GET['minRating']) ? $_GET['minRating'] : 0;//
 $minBid = isset($_GET['minBidAmountSpinner']) ? $_GET['minBidAmountSpinner'] : 0;
 $maxBid = isset($_GET['maxBidAmountSpinner']) ? $_GET['maxBidAmountSpinner'] : 9999;

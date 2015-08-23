@@ -114,41 +114,39 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 {
     $startResult = ($pageNumber - 1) * $numOfResults;
 
-    /*$arrayQuery = "SELECT l.*, ad.state
-                   FROM listing l INNER JOIN list_addr ad ON l.listing_id = ad.list_addr_id";*/
-    $arrayQuery = "select * 
-					from bids left join listing on bids.listing_id=listing.listing_id 
-					left join feedback on listing.list_user_id=feedback.list_user_id
-					left join list_addr on listing.list_addr_id=list_addr.list_addr_id;";
+    $arrayQuery  = "SELECT l.*, ad.state, COALESCE(bd.minbid, l.strt_bid) AS bid 
+                    FROM listing l INNER JOIN list_addr ad ON l.list_addr_id = ad.list_addr_id ";
+    $arrayQuery .= "LEFT JOIN (SELECT listing_id, MIN(bid_amnt) minbid FROM bids GROUP BY listing_id) bd 
+                    ON l.listing_id = bd.listing_id ";
+    $arrayQuery .= "WHERE l.visible = 1 AND list_end_tmstmp > now() ";
     
-    $wheres = 0;
-    if ($term != '') {
-        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
-        $arrayQuery .= " shrt_descn LIKE '" . $term . "'";
-    }
-    if ($category != '') {
-        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
-        $arrayQuery .= " list_typ_cd=" . $category;
-    }
-    if ($state != '') {
-        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
-        $arrayQuery .= " state=" . $state;
-    }
-    if ($minBid) {
-    	$arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
-        $arrayQuery .= " bids.bid_amnt >" . $minBid;
-    }
-    if ($maxBid) {
-    	$arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
-        $arrayQuery .= " bids.bid_amnt <" . $maxBid;
+    if($state != '%all%')
+       $arrayQuery .= " AND ad.state LIKE '" . $state . "' ";
+    if($term != '%%')
+       $arrayQuery .= " AND shrt_descn LIKE '" . $term . "'";
+    if($category != 'all')
+       $arrayQuery .= " AND list_typ_cd='" . $category . "'";
+    if($minBid != '')
+       $arrayQuery .= " AND COALESCE(bd.minbid, l.strt_bid) >=" . $minBid;
+    if($maxBid != '')
+       $arrayQuery .= " AND COALESCE(bd.minbid, l.strt_bid) <=" . $maxBid;
+
+    if($sortBy !=''){
+       if($sortBy == 'Time Left: Ending Soonest')
+          $arrayQuery.= " ORDER BY list_end_tmstmp ASC";
+       if($sortBy == 'Time Left: Ending Latest')
+          $arrayQuery.= " ORDER BY list_end_tmstmp DESC";
+       if($sortBy == 'Age: Oldest')
+          $arrayQuery.= " ORDER BY list_strt_tmstmp ASC";
+       if($sortBy == 'Age: Newest')
+          $arrayQuery.= " ORDER BY list_strt_tmstmp DESC";
+       if($sortBy == 'Highest Bid')
+          $arrayQuery.= " ORDER BY bid DESC";
+       if($sortBy == 'Lowest Bid')
+          $arrayQuery.= " ORDER BY bid ASC";
     }
 
-
-    if(true){
-        $arrayQuery.= " ORDER BY listing_id DESC";
-    }
-
-//				   LIMIT " . $numOfResults . " OFFSET " . $startResult;
+//" LIMIT " . $numOfResults . " OFFSET " . $startResult;
 
     return query($arrayQuery);
 }

@@ -114,8 +114,13 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 {
     $startResult = ($pageNumber - 1) * $numOfResults;
 
-    $arrayQuery = "SELECT l.*, ad.state
-                   FROM listing l INNER JOIN list_addr ad ON l.listing_id = ad.list_addr_id";
+    /*$arrayQuery = "SELECT l.*, ad.state
+                   FROM listing l INNER JOIN list_addr ad ON l.listing_id = ad.list_addr_id";*/
+    $arrayQuery = "select * 
+					from bids left join listing on bids.listing_id=listing.listing_id 
+					left join feedback on listing.list_user_id=feedback.list_user_id
+					left join list_addr on listing.list_addr_id=list_addr.list_addr_id;";
+    
     $wheres = 0;
     if ($term != '') {
         $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
@@ -125,10 +130,18 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
         $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
         $arrayQuery .= " list_typ_cd=" . $category;
     }
-    /*if ($state != '') {
+    if ($state != '') {
         $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
         $arrayQuery .= " state=" . $state;
-    }*/
+    }
+    if ($minBid) {
+    	$arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
+        $arrayQuery .= " bids.bid_amnt >" . $minBid;
+    }
+    if ($maxBid) {
+    	$arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
+        $arrayQuery .= " bids.bid_amnt <" . $maxBid;
+    }
 
 
     if(true){

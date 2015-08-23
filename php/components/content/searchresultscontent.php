@@ -17,13 +17,13 @@ foreach($jobResults as $count => $db_array){
                                 $currentBid = $currentb[0][0];
                         ?>
                         <?php
-                        $address = getListAddr($db_array['listing_id']);
+                        $address = getListAddr($db_array['list_addr_id']);
                         if ($address) {
                         ?>
 
-                        <p class="listing-title"><?php echo "Location: " . $address[0]["state"]?></p>
+                        <p class="listing-title"><?php echo "Location: " . $address[0]['state']?></p>
                         <?php
-                    }
+                        }
                         ?>
                         <p class="listing-bid">Current Bid: <span class="listing-bid-amount"><?php echo $currentBid ?></span></p>
 

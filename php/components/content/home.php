@@ -37,11 +37,11 @@ $jobResults = getLatestJobListing(20);
                                 $currentBid = $currentb[0][0];
                         ?>
                         <?php
-                        $address = getListAddr($db_array['listing_id']);
+                        $address = getListAddr($db_array['list_addr_id']);
                         if ($address) {
                         ?>
 
-                        <p class="listing-title"><?php echo "Location: " . $address[0]["state"]?></p>
+                        <p class="listing-title"><?php echo "Location: " . $address[0]['state']?></p>
                         <?php
                         }
                         ?>

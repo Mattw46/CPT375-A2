@@ -1,7 +1,7 @@
 <?php
 /* Model controls all interactions with the database */
 
-require_once 'db_connect.php'; 
+require_once 'db_connect_localhost.php'; 
 require_once 'validate.php';
 
 define("INVALID_USER", 0);

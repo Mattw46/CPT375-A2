@@ -1,4 +1,5 @@
 <?php
+/* loading admin page components */
 include_once('./model/model.php');
 session_start();
 $pageTitle = "CPT375 A2 : Admin";

@@ -1,4 +1,5 @@
 <?php
+/* loading addjob page components */
 session_start();
 if (isset($_SESSION['authenticated'])) {
     $pageTitle = "CPT375 A2 : Add Job";

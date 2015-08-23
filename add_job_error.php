@@ -1,4 +1,5 @@
 <?php
+/* loading add_job_error page components */
 //$jobid = getJobById(filter_var($_GET['job'],FILTER_SANITIZE_NUMBER_INT));
 session_start();
 if (isset($_SESSION['authenticated'])) {

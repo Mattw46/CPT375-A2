@@ -120,9 +120,9 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
                     ON l.listing_id = bd.listing_id ";
     $arrayQuery .= "WHERE l.visible = 1 AND list_end_tmstmp > now() ";
     
-    if($state != '%all%')
+    if($state != '%all%' && $state != '')
        $arrayQuery .= " AND ad.state LIKE '" . $state . "' ";
-    if($term != '%%')
+    if($term != '%%' && $state != '')
        $arrayQuery .= " AND shrt_descn LIKE '" . $term . "'";
     if($category != 'all')
        $arrayQuery .= " AND list_typ_cd='" . $category . "'";
@@ -145,7 +145,7 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
        if($sortBy == 'Lowest Bid')
           $arrayQuery.= " ORDER BY bid ASC";
     }
-
+    
 //" LIMIT " . $numOfResults . " OFFSET " . $startResult;
 
     return query($arrayQuery);

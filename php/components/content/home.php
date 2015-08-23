@@ -10,7 +10,7 @@ $jobResults = getLatestJobListing(20);
             <?php
             $tradesList = get_trades();
             foreach($tradesList as $row){
-               echo '<li><a href="./search.php?categoryId=' . $row[0] . '">' . $row[1] . '</a></li>';
+               echo '<li><a href="./search.php?category=' . $row[0] . '">' . $row[1] . '</a></li>';
             }
             ?>
            

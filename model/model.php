@@ -350,10 +350,11 @@ function getAdminUsers()
 // return a list of bids for given lising id
 function getCurrentBid($listingId)
 {
-    $bidQry = "SELECT bids.bid_amnt AS bid
-				FROM bids
-				where bids.listing_id ='" . $listingId . "'
-				ORDER BY bid_id DESC;";
+    $bidQry = "SELECT COALESCE(bd.minbid, l.strt_bid) AS bid
+               FROM listing AS l
+               LEFT JOIN (SELECT listing_id, MIN(bid_amnt) minbid FROM bids GROUP BY listing_id) bd
+               ON l.listing_id = bd.listing_id
+               WHERE l.listing_id ='" . $listingId . "'";
     $result = query($bidQry);
     if (empty($result))
         return 0;

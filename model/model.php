@@ -515,9 +515,10 @@ function deactivate_auction($listingId)
 }
 
 // Admin function
-function remove_auction()
+function remove_auction($listingId)
 {
-    delete();
+    $auction = "DELETE FROM listing WHERE listing_id = " . $listingID;;
+    delete($auction);
 }
 
 /*  Admin only function to delete user*/

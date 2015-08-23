@@ -114,8 +114,8 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
 {
     $startResult = ($pageNumber - 1) * $numOfResults;
 
-    $arrayQuery = "SELECT *
-                   FROM listing";
+    $arrayQuery = "SELECT l.*, ad.state
+                   FROM listing l INNER JOIN list_addr ad ON l.listing_id = ad.list_addr_id";
     $wheres = 0;
     if ($term != '') {
         $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
@@ -125,6 +125,10 @@ function getJobs($term, $state, $category, $minRating, $minBid, $maxBid, $numOfR
         $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
         $arrayQuery .= " list_typ_cd=" . $category;
     }
+    /*if ($state != '') {
+        $arrayQuery .= ($wheres++ == 0) ? " WHERE" : "";
+        $arrayQuery .= " state=" . $state;
+    }*/
 
 
     if(true){

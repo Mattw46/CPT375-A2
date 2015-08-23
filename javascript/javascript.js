@@ -87,11 +87,11 @@ $(function () {
                 minlength: 9,
                 regex: /^[A-Za-z0-9 -]{9,}$/
             },
-            address2: {
+            /*address2: {
                 required: true,
                 minlength: 9,
                 regex: /^[A-Za-z0-9 -]{9,}$/
-            },
+            },*/
             suburb: {},
             postCode: {
                 required: true,

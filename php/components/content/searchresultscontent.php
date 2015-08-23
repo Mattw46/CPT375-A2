@@ -51,4 +51,5 @@ foreach($jobResults as $count => $db_array){
                     </div>
                 </div>
         <?php }
-            }
+            }?>
+</div>
